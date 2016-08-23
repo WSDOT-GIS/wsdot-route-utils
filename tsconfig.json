@@ -4,9 +4,10 @@
         "target": "es2015",
         "noImplicitAny": true,
         "sourceMap": false,
-        "declaration": true
+        "declaration": true,
+        "outDir": "es2015"
     },
-    "exclude": [
-        "node_modules"
+    "files": [
+        "index.ts"
     ]
 }

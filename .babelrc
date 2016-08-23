@@ -1,0 +1,8 @@
+{
+    "moduleId": "wsdotRouteUtils",
+    "presets": [
+        ["es2015", {
+            "modules": "umd"
+        }]
+    ]
+}

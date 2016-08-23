@@ -1,6 +1,8 @@
 index.js
 index.d.ts
 
+typings
+
 # Logs
 logs
 *.log

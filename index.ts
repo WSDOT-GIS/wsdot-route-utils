@@ -37,6 +37,7 @@ FT Ferry Terminal
  * @param {RegExp} inputRe - A regular expression ending with "$".
  * @param {string} escapedText - Text to append to the end of the input RegExp.
  * @returns {RegExp} - Returns a modified copy of the input RegExp.
+ * @private
  */
 function appendToRegex(inputRe: RegExp, escapedText: string): RegExp {
     return new RegExp(inputRe.source.split("$")[0] + escapedText + "$");
@@ -66,6 +67,11 @@ export const srdRegex = appendToRegex(srRegex, dirReSuffix);
  */
 export const relaxedRegex = /^(\d{3})(?:([A-Z1-9]{2})([A-Z0-9]{0,6}))?$/;
 
+/**
+ * Like {@link relaxedRegex}, but allows optional "d" suffix.
+ * @type {Regexp}
+ * @see {@link relaxedRegex}
+ */
 export const relaxedWithDirRegexp = appendToRegex(relaxedRegex, dirReSuffix);
 
 // Define RRTs
@@ -140,6 +146,7 @@ export function getRouteParts(routeId: string, throwErrorOnMatchFail: boolean = 
 
 /**
  * Provides a description of a route.
+ * @class
  */
 export default class RouteDescription {
     private _sr: string;
@@ -151,6 +158,7 @@ export default class RouteDescription {
      * Creates new instance.
      * @param {string} routeId - route ID
      * @param {boolean} canIncludeDirection - Indicates if "d" suffix is allowed in ID to show direction.
+     * @constructor
      */
     constructor(routeId: string, canIncludeDirection: boolean = false) {
         if (canIncludeDirection) {
@@ -164,6 +172,7 @@ export default class RouteDescription {
 
     /**
      * Mainline component of route ID.
+     * @member {string}
      */
     public get sr(): string {
         return this._sr;
@@ -171,6 +180,7 @@ export default class RouteDescription {
 
     /**
      * Related Route Type (RRT) component.
+     * @member {string}
      */
     public get rrt(): string {
         return this._rrt;
@@ -178,6 +188,7 @@ export default class RouteDescription {
 
     /**
      * Related Route Qualifier (RRQ).
+     * @member {string}
      */
     public get rrq(): string {
         return this._rrq;
@@ -188,6 +199,7 @@ export default class RouteDescription {
      * Indicates decreasing direction was specified.
      * If the "canIncludeDirection" option was set to false
      * in the constructor, this value will be null.
+     * @member {boolean}
      */
     public get isDecrease(): boolean {
         return this._isDecrease;
@@ -196,6 +208,7 @@ export default class RouteDescription {
 
     /**
      * More detailed description of the RRT.
+     * @member {string}
      */
     public get rrtDescription(): string {
         return this.rrt ? rrts[this.rrt] : null;
@@ -203,6 +216,8 @@ export default class RouteDescription {
 
     /**
      * If applicable, milepost where this route either leaves or joins the mainline.
+     * Value will be null when not applicable.
+     * @member {number}
      */
     public get mainlineConnectionMP(): number {
         if (this.rrq && /^\d+$/.test(this.rrq)) {
@@ -214,6 +229,7 @@ export default class RouteDescription {
 
     /**
      * Detailed description of the RRQ.
+     * @member {string}
      */
     public get rrqDescription(): string {
         if (!this.rrq) {
@@ -229,6 +245,7 @@ export default class RouteDescription {
 
     /**
      * Returns the route as a string.
+     * @returns {string}
      */
     public toString() {
         return `${this.sr}${this.rrt || ""}${this.rrq || ""}`;

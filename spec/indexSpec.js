@@ -36,5 +36,21 @@ describe("RouteDescription", () => {
         let desc = new RouteDescription(srid);
         expect(desc.mainlineConnectionMP).toEqual(99.58);
     });
+
+    it('can optionally support direction', function() {
+        const withDirId = "529SPEVERETd";
+        const nonDirId = "005Q516479";
+
+        let withDirDesc = new RouteDescription(withDirId, true);
+        let nonDirDesc = new RouteDescription(nonDirId, false);
+        let incDesc = new RouteDescription(nonDirId, true);
+        expect(withDirDesc.isDecrease).toEqual(true);
+        expect(nonDirDesc.isDecrease).toEqual(null);
+        expect(incDesc.isDecrease).toEqual(false);
+        expect(() => {
+            let desc = new RouteDescription(withDirId, false);
+        }).toThrowError();
+    });
+
 });
 

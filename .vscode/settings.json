@@ -2,6 +2,8 @@
 {
     "eslint.enable": false,
     "files.exclude": {
+        "es2015": true,
+        "**/*.js": { "when": "$(basename).ts" },
         "**/.git": true,
         "**/.svn": true,
         "**/.hg": true,

@@ -33,18 +33,40 @@ FT Ferry Terminal
 */
 
 /**
+ * Appends text to the end of (a copy of) a regular expression.
+ * @param {RegExp} inputRe - A regular expression ending with "$".
+ * @param {string} escapedText - Text to append to the end of the input RegExp.
+ * @returns {RegExp} - Returns a modified copy of the input RegExp.
+ */
+function appendToRegex(inputRe: RegExp, escapedText: string): RegExp {
+    return new RegExp(inputRe.source.split("$")[0] + escapedText + "$");
+}
+
+/**
  * Matches state route format, with captures for SR, RRT, and RRQ. First element in array will be entire match.
  * @type {Regexp}
  * @const
  */
-export const srRegex = /^(\d{3})(?:((?:AR)|(?:C[DI])|(?:C[O])|(?:F[DI])|(?:LX)|(?:[PQRS][\dU])|(?:RL)|(?:SP)|(?:TB)|(?:TR)|(?:PR)|(?:F[ST])|(?:ML))([A-Z0-9]{0,6}))?$/i;
+export const srRegex = /^(\d{3})(?:((?:AR)|(?:C[DI])|(?:C[O])|(?:F[DI])|(?:LX)|(?:[PQRS][\dU])|(?:RL)|(?:SP)|(?:TB)|(?:TR)|(?:PR)|(?:F[ST])|(?:ML))([A-Z0-9]{0,6}))?$/;
+
+// Detects the decrease directional indicator used in WAPR.
+const dirReSuffix = "(d)?";
+
+/**
+ * Matches state route + optional direction format, with captures for SR, RRT, RRQ, and direction. First element in array will be entire match.
+ * @type {Regexp}
+ * @const
+ */
+export const srdRegex = appendToRegex(srRegex, dirReSuffix);
 
 /**
  * A more relaxed Regexp than srRegex, which doesn't check for specific RRTs, only that they are two characters long if present.
  * @type {Regexp}
  * @const
  */
-export const relaxedRegex = /^(\d{3})(?:([A-Z1-9]{2})(\w{0,6}))?/i;
+export const relaxedRegex = /^(\d{3})(?:([A-Z1-9]{2})([A-Z0-9]{0,6}))?$/;
+
+export const relaxedWithDirRegexp = appendToRegex(relaxedRegex, dirReSuffix);
 
 // Define RRTs
 let rrts: any = {
@@ -100,11 +122,12 @@ let rrqs: any = {
  * (as would be the case with a mainline).
  * Will be null if the routeId is not in the expected format and if throwErrorOnMatchFail is false.
  */
-export function getRouteParts(routeId: string, throwErrorOnMatchFail: boolean = false) {
+export function getRouteParts(routeId: string, throwErrorOnMatchFail: boolean = false, canIncludeDirection: boolean = false) {
     if (!(routeId && typeof routeId === "string")) {
         throw new TypeError("Input must be a string.");
     }
-    let match = routeId.match(srRegex);
+    let re = canIncludeDirection ? srdRegex : srRegex;
+    let match = routeId.match(re);
     if (match) {
         return match.splice(1).map(s => {
             return s || null;
@@ -122,8 +145,21 @@ export default class RouteDescription {
     private _sr: string;
     private _rrt: string;
     private _rrq: string;
-    constructor(private routeId: string) {
-        [this._sr, this._rrt, this._rrq] = getRouteParts(routeId);
+    private _isDecrease: boolean = null;
+
+    /**
+     * Creates new instance.
+     * @param {string} routeId - route ID
+     * @param {boolean} canIncludeDirection - Indicates if "d" suffix is allowed in ID to show direction.
+     */
+    constructor(routeId: string, canIncludeDirection: boolean = false) {
+        if (canIncludeDirection) {
+            let d: string;
+            [this._sr, this._rrt, this._rrq, d] = getRouteParts(routeId, true, canIncludeDirection);
+            this._isDecrease = d === "d" ? true : false;
+        } else {
+            [this._sr, this._rrt, this._rrq] = getRouteParts(routeId, true, canIncludeDirection);
+        }
     }
 
     /**
@@ -146,6 +182,17 @@ export default class RouteDescription {
     public get rrq(): string {
         return this._rrq;
     }
+
+
+    /**
+     * Indicates decreasing direction was specified.
+     * If the "canIncludeDirection" option was set to false
+     * in the constructor, this value will be null.
+     */
+    public get isDecrease(): boolean {
+        return this._isDecrease;
+    }
+
 
     /**
      * More detailed description of the RRT.
@@ -184,6 +231,6 @@ export default class RouteDescription {
      * Returns the route as a string.
      */
     public toString() {
-    return `${this.sr}${this.rrt || ""}${this.rrq || ""}`;
-}
+        return `${this.sr}${this.rrt || ""}${this.rrq || ""}`;
+    }
 }

@@ -4,5 +4,8 @@
         ["es2015", {
             "modules": "umd"
         }]
+    ],
+    "plugins": [
+        "transform-strict-mode"
     ]
 }

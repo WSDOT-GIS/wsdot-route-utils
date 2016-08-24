@@ -24,12 +24,13 @@ describe("RouteDescription", () => {
     });
     it("can parse route with RRT && RRQ", () => {
         var srid = "101COABERDN";
-        var [sr, rrt, rrq] = getRouteParts(srid);
+        var parts = getRouteParts(srid);
+        var sr = parts[0], rrt = parts[1], rrq = parts[2];
         var desc = new RouteDescription(srid);
         expect(desc.sr).toEqual(sr);
         expect(desc.rrt).toEqual(rrt);
         expect(desc.rrq).toEqual(rrq);
-        expect(desc.rrtDescription).toEqual("Coupvar");
+        expect(desc.rrtDescription).toEqual("Couplet");
         expect(desc.rrqDescription).toEqual("Aberdeen");
         expect(desc.mainlineConnectionMP).toBeNull();
     });

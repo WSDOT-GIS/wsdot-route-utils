@@ -21,7 +21,7 @@
     "route"
   ],
   "engines": {
-    "node": ">= 6",
+    "node": ">= 4",
     "npm": ">= 3"
   },
   "author": "WSDOT",

@@ -24,7 +24,7 @@ Get from NPM
 Sample
 ------
 
-Load module
+### Load module ###
 
 ```javascript
 let wsdotRouteUtils = require("wsdot-route-utils");
@@ -33,7 +33,8 @@ let getRouteParts = wsdotRouteUtils.getRouteParts;
 ```
 
 
-Get info about a route ID
+### Get info about a route ID ###
+
 ```javascript
 const srid = "101COABERDN";
 let desc = new RouteDescription(srid);

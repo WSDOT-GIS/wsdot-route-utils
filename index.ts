@@ -146,7 +146,6 @@ export function getRouteParts(routeId: string, throwErrorOnMatchFail: boolean = 
 
 /**
  * Provides a description of a route.
- * @class
  */
 export default class RouteDescription {
     private _sr: string;

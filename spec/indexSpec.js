@@ -1,5 +1,7 @@
 /*eslint-env jasmine*/
 
+"use strict";
+
 let wsdotRouteUtils = require("../index");
 let RouteDescription = wsdotRouteUtils.default;
 let getRouteParts = wsdotRouteUtils.getRouteParts;

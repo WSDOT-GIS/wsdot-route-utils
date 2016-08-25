@@ -2,8 +2,7 @@
  * @module route-info
  */
 
-import "babel-polyfill";
-
+import "babel-polyfill"; // Allows generator functions to be transpiled.
 
 /**
  * @enum module:route-info.RouteDirections
@@ -316,6 +315,16 @@ export class RouteInfo {
     public get isDecrease(): boolean {
         return (this.direction & RouteDirections.DECREASE) === RouteDirections.DECREASE;
     }
+
+
+    /**
+     * Indicates if the route has both increasing and decreasing components.
+     * @returns {boolean}
+     */
+    public get isBoth(): boolean {
+        return (this.direction & RouteDirections.BOTH) === RouteDirections.BOTH;
+    }
+
 
 }
 

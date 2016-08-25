@@ -119,9 +119,11 @@ Utilities for WSDOT Route Identifiers
     * [.RouteDescription](#module_wsdot-route-utils.RouteDescription)
         * [new RouteDescription()](#new_module_wsdot-route-utils.RouteDescription_new)
         * _instance_
+            * [.routeInfo](#module_wsdot-route-utils.RouteDescription+routeInfo) ⇒ <code>module:route-info--module.exports.RouteInfo</code>
             * [.sr](#module_wsdot-route-utils.RouteDescription+sr) : <code>string</code>
             * [.rrt](#module_wsdot-route-utils.RouteDescription+rrt) : <code>string</code>
             * [.rrq](#module_wsdot-route-utils.RouteDescription+rrq) : <code>string</code>
+            * [.isMainline](#module_wsdot-route-utils.RouteDescription+isMainline)
             * [.isDecrease](#module_wsdot-route-utils.RouteDescription+isDecrease) : <code>boolean</code>
             * [.rrtDescription](#module_wsdot-route-utils.RouteDescription+rrtDescription) : <code>string</code>
             * [.mainlineConnectionMP](#module_wsdot-route-utils.RouteDescription+mainlineConnectionMP) : <code>number</code>
@@ -146,9 +148,11 @@ Utilities for WSDOT Route Identifiers
 * [.RouteDescription](#module_wsdot-route-utils.RouteDescription)
     * [new RouteDescription()](#new_module_wsdot-route-utils.RouteDescription_new)
     * _instance_
+        * [.routeInfo](#module_wsdot-route-utils.RouteDescription+routeInfo) ⇒ <code>module:route-info--module.exports.RouteInfo</code>
         * [.sr](#module_wsdot-route-utils.RouteDescription+sr) : <code>string</code>
         * [.rrt](#module_wsdot-route-utils.RouteDescription+rrt) : <code>string</code>
         * [.rrq](#module_wsdot-route-utils.RouteDescription+rrq) : <code>string</code>
+        * [.isMainline](#module_wsdot-route-utils.RouteDescription+isMainline)
         * [.isDecrease](#module_wsdot-route-utils.RouteDescription+isDecrease) : <code>boolean</code>
         * [.rrtDescription](#module_wsdot-route-utils.RouteDescription+rrtDescription) : <code>string</code>
         * [.mainlineConnectionMP](#module_wsdot-route-utils.RouteDescription+mainlineConnectionMP) : <code>number</code>
@@ -165,6 +169,12 @@ Utilities for WSDOT Route Identifiers
 #### new RouteDescription()
 Provides a description of a route.
 
+<a name="module_wsdot-route-utils.RouteDescription+routeInfo"></a>
+
+#### routeDescription.routeInfo ⇒ <code>module:route-info--module.exports.RouteInfo</code>
+Gets information about a route.
+
+**Kind**: instance property of <code>[RouteDescription](#module_wsdot-route-utils.RouteDescription)</code>  
 <a name="module_wsdot-route-utils.RouteDescription+sr"></a>
 
 #### routeDescription.sr : <code>string</code>
@@ -181,6 +191,12 @@ Related Route Type (RRT) component.
 
 #### routeDescription.rrq : <code>string</code>
 Related Route Qualifier (RRQ).
+
+**Kind**: instance property of <code>[RouteDescription](#module_wsdot-route-utils.RouteDescription)</code>  
+<a name="module_wsdot-route-utils.RouteDescription+isMainline"></a>
+
+#### routeDescription.isMainline
+Indicates if this is a mainline route ID.I.e., no RRT or RRQ.
 
 **Kind**: instance property of <code>[RouteDescription](#module_wsdot-route-utils.RouteDescription)</code>  
 <a name="module_wsdot-route-utils.RouteDescription+isDecrease"></a>

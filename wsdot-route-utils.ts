@@ -3,7 +3,7 @@
  * @module wsdot-route-utils
  */
 
-import { getRouteInfo } from "./route-info";
+import { getRouteInfo, RouteInfo } from "./route-info";
 
 export { getRouteInfo }
 
@@ -156,6 +156,7 @@ export class RouteDescription {
     private _rrt: string;
     private _rrq: string;
     private _isDecrease: boolean = null;
+    private _routeInfo: RouteInfo;
 
     /**
      * Creates new instance.
@@ -171,6 +172,19 @@ export class RouteDescription {
             [this._sr, this._rrt, this._rrq] = getRouteParts(routeId, true, canIncludeDirection);
         }
     }
+
+
+    /**
+     * Gets information about a route.
+     * @returns {module:route-info.RouteInfo}
+     */
+    public get routeInfo(): RouteInfo {
+        if (this._routeInfo === undefined) {
+            this._routeInfo = getRouteInfo(`${this._sr}${this._rrt}${this._rrq}`);
+        }
+        return this._routeInfo;
+    }
+
 
     /**
      * Mainline component of route ID.
@@ -194,6 +208,14 @@ export class RouteDescription {
      */
     public get rrq(): string {
         return this._rrq;
+    }
+
+    /**
+     * Indicates if this is a mainline route ID.
+     * I.e., no RRT or RRQ.
+     */
+    public get isMainline(): boolean {
+        return !this.rrt && !this.rrq;
     }
 
 

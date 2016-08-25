@@ -8,6 +8,7 @@
   "scripts": {
     "createdocs": "jsdoc2md es2015/*.js --template README.hbs > README.md",
     "prepublish": "tsc && babel es2015 -d . && npm run createdocs",
+    "pretest": "babel spec/wsdotRouteUtils6pec.js > spec/wsdotRouteUtilsSpec.js",
     "test": "jasmine"
   },
   "files": [

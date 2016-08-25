@@ -4,5 +4,8 @@
     "plugins": [
         "standard",
         "promise"
+    ],
+    "ignore": [
+        "spec/*.Spec.js"
     ]
 }

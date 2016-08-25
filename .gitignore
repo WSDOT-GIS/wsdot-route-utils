@@ -2,6 +2,7 @@ wsdot-route-utils.js
 wsdot-route-utils.d.ts
 **/route-info.js
 **/route-info.d.ts
+spec/*Spec.js
 
 typings
 

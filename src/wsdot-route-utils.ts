@@ -156,7 +156,7 @@ export class RouteDescription {
     private _rrt: string;
     private _rrq: string;
     private _isDecrease: boolean = null;
-    private _routeInfo: RouteInfo;
+    private _routeInfo: RouteInfo = undefined;
 
     /**
      * Creates new instance.
@@ -180,7 +180,7 @@ export class RouteDescription {
      */
     public get routeInfo(): RouteInfo {
         if (this._routeInfo === undefined) {
-            this._routeInfo = getRouteInfo(`${this._sr}${this._rrt}${this._rrq}`);
+            this._routeInfo = getRouteInfo(`${this._sr}${this._rrt || ""}${this._rrq || ""}`);
         }
         return this._routeInfo;
     }

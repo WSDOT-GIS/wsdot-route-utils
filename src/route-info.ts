@@ -1,4 +1,5 @@
 /**
+ * Provides information about state routes.
  * @module route-info
  */
 

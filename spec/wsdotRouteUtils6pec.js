@@ -21,6 +21,11 @@ describe('RouteDescription', () => {
     expect(desc.rrqDescription).toBeNull()
     expect(desc.rrqDescription).toBeNull()
     expect(desc.toString()).toEqual(srid)
+    let routeInfo = desc.routeInfo
+    expect(routeInfo.type).toEqual('IS')
+    expect(routeInfo.isIncrease).toEqual(true)
+    expect(routeInfo.isDecrease).toEqual(true)
+    expect(routeInfo.isBoth).toEqual(true)
   })
   it('can parse route with RRT && RRQ', () => {
     const srid = '101COABERDN'
@@ -32,11 +37,15 @@ describe('RouteDescription', () => {
     expect(desc.rrtDescription).toEqual('Couplet')
     expect(desc.rrqDescription).toEqual('Aberdeen')
     expect(desc.mainlineConnectionMP).toBeNull()
+    let routeInfo = desc.routeInfo
+    expect(routeInfo.type).toEqual('US')
+    expect(routeInfo.isBoth).toEqual(true)
   })
   it('can parse MP from ramp ID', () => {
     const srid = '005R109958'
     let desc = new RouteDescription(srid)
     expect(desc.mainlineConnectionMP).toEqual(99.58)
+    expect(desc.routeInfo).toBeNull()
   })
 
   it('can optionally support direction', function () {

@@ -27,34 +27,34 @@ Sample
 ### Load module ###
 
 ```javascript
-let wsdotRouteUtils = require("wsdot-route-utils");
-let RouteDescription = wsdotRouteUtils.RouteDescription;
-let getRouteParts = wsdotRouteUtils.getRouteParts;
+let wsdotRouteUtils = require('wsdot-route-utils')
+let RouteDescription = wsdotRouteUtils.RouteDescription
+let getRouteParts = wsdotRouteUtils.getRouteParts
 ```
 
 
 ### Get info about a route ID ###
 
 ```javascript
-const srid = "101COABERDN";
-let desc = new RouteDescription(srid);
-console.log(desc.sr); // "101""
-console.log(desc.rrt); // "CO"
-console.log(desc.rrq); // "ABERDN"
-console.log(desc.rrtDescription); // "Couplet"
-console.log(desc.rrqDescription); // "Aberdeen" (description may sometimes be just the same as `rrq`).
-console.log(desc.mainlineConnectionMP); // null
+const srid = '101COABERDN'
+let desc = new RouteDescription(srid)
+console.log(desc.sr) // '101'
+console.log(desc.rrt) // 'CO'
+console.log(desc.rrq) // 'ABERDN'
+console.log(desc.rrtDescription) // 'Couplet'
+console.log(desc.rrqDescription) // 'Aberdeen' (description may sometimes be just the same as `rrq`).
+console.log(desc.mainlineConnectionMP) // null
 ```
 
 ```javascript
-const srid = "005R109958";
-let desc = new RouteDescription(srid);
-console.log(desc.sr); // "005""
-console.log(desc.rrt); // "R1"
-console.log(desc.rrq); // "09958"
-console.log(desc.rrtDescription); // "Off Ramp, Dec"
-console.log(desc.rrqDescription); // "at milepost 99.58"
-console.log(desc.mainlineConnectionMP); // 99.58
+const srid = '005R109958'
+let desc = new RouteDescription(srid)
+console.log(desc.sr) // '005'
+console.log(desc.rrt) // 'R1'
+console.log(desc.rrq) // '09958'
+console.log(desc.rrtDescription) // 'Off Ramp, Dec'
+console.log(desc.rrqDescription) // 'at milepost 99.58'
+console.log(desc.mainlineConnectionMP) // 99.58
 
 ```
 

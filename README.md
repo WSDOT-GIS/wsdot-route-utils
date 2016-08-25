@@ -93,7 +93,7 @@ Generator function for looping through the route infos.
 <a name="module_route-info--module.exports.RouteDirections"></a>
 
 #### module.exports.RouteDirections
-**Kind**: static enum of <code>[module.exports](#exp_module_route-info--module.exports)</code>  
+**Kind**: static enum property of <code>[module.exports](#exp_module_route-info--module.exports)</code>  
 <a name="module_route-info--module.exports.getRouteInfo"></a>
 
 #### module.exports.getRouteInfo(routeId) ⇒ <code>module:route-info--module.exports.RouteInfo</code>

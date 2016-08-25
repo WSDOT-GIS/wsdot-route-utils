@@ -8,6 +8,6 @@
         "outDir": "es2015"
     },
     "files": [
-        "index.ts"
+        "wsdot-route-utils.ts"
     ]
 }

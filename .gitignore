@@ -1,5 +1,7 @@
-index.js
-index.d.ts
+wsdot-route-utils.js
+wsdot-route-utils.d.ts
+**/route-info.js
+**/route-info.d.ts
 
 typings
 

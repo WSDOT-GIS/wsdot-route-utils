@@ -2,8 +2,8 @@
 
 "use strict";
 
-var wsdotRouteUtils = require("../index");
-var RouteDescription = wsdotRouteUtils.default;
+var wsdotRouteUtils = require("../wsdot-route-utils");
+var RouteDescription = wsdotRouteUtils.RouteDescription;
 var getRouteParts = wsdotRouteUtils.getRouteParts;
 
 describe("RouteDescription", () => {

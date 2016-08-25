@@ -1,11 +1,10 @@
 {
-    "moduleId": "wsdotRouteUtils",
     "presets": [
-        ["es2015", {
-            "modules": "umd"
-        }]
-    ],
-    "plugins": [
-        "transform-strict-mode"
+        [
+            "es2015",
+            {
+                "modules": "umd"
+            }
+        ]
     ]
 }

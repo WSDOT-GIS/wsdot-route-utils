@@ -3,6 +3,9 @@
  * @module wsdot-route-utils
  */
 
+import { getRouteInfo } from "./route-info";
+
+export { getRouteInfo }
 
 /*
 ==RRTs (Related Roadway Type)==
@@ -146,8 +149,9 @@ export function getRouteParts(routeId: string, throwErrorOnMatchFail: boolean = 
 
 /**
  * Provides a description of a route.
+ * @class module:wsdot-route-utils.RouteDescription
  */
-export default class RouteDescription {
+export class RouteDescription {
     private _sr: string;
     private _rrt: string;
     private _rrq: string;
@@ -157,7 +161,6 @@ export default class RouteDescription {
      * Creates new instance.
      * @param {string} routeId - route ID
      * @param {boolean} canIncludeDirection - Indicates if "d" suffix is allowed in ID to show direction.
-     * @constructor
      */
     constructor(routeId: string, canIncludeDirection: boolean = false) {
         if (canIncludeDirection) {
@@ -227,6 +230,22 @@ export default class RouteDescription {
     }
 
     /**
+     * Indicates if the route is a "local collector" type.
+     * @returns {boolean}
+     */
+    public get isLocalColector(): boolean {
+        return this.rrt && /((LX)|(F[DI]))/.test(this.rrt);
+    }
+
+    /**
+     * Indicates if the route is a ramp.
+     * @returns {boolean}
+     */
+    public get isRamp(): boolean {
+        return this.rrt && /[PQRS][1-9]/.test(this.rrt);
+    }
+
+    /**
      * Detailed description of the RRQ.
      * @member {string}
      */
@@ -247,6 +266,6 @@ export default class RouteDescription {
      * @returns {string}
      */
     public toString() {
-        return `${this.sr}${this.rrt || ""}${this.rrq || ""}`;
+        return `${this.sr}${this.rrt || ""}${this.rrq || ""}${this.isDecrease === true ? "d" : ""}`;
     }
 }

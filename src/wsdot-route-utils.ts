@@ -3,9 +3,7 @@
  * @module wsdot-route-utils
  */
 
-import { getRouteInfo, RouteInfo } from "./route-info";
-
-export { getRouteInfo }
+import { getShieldType, ShieldType } from "./route-shields";
 
 /*
 ==RRTs (Related Roadway Type)==
@@ -156,7 +154,7 @@ export class RouteDescription {
     private _rrt: string;
     private _rrq: string;
     private _isDecrease: boolean = null;
-    private _routeInfo: RouteInfo = undefined;
+    private _shield: ShieldType = undefined;
 
     /**
      * Creates new instance.
@@ -173,18 +171,19 @@ export class RouteDescription {
         }
     }
 
-
     /**
-     * Gets information about a route.
-     * @returns {module:route-info.RouteInfo}
+     * Gets the type of shield of a WA state route: "IS", "US", or "SR"
      */
-    public get routeInfo(): RouteInfo {
-        if (this._routeInfo === undefined) {
-            this._routeInfo = getRouteInfo(`${this._sr}${this._rrt || ""}${this._rrq || ""}`);
+    public get shield(): ShieldType {
+        if (this._shield === undefined) {
+            if (!this.sr) {
+                this._shield = null;
+            } else {
+                this._shield = getShieldType(this.sr) || null;
+            }
         }
-        return this._routeInfo;
+        return this._shield;
     }
-
 
     /**
      * Mainline component of route ID.

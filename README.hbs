@@ -26,10 +26,24 @@ Sample
 
 ### Load module ###
 
+#### JavaScript ####
+
+##### ES5 #####
 ```javascript
 let wsdotRouteUtils = require('wsdot-route-utils')
 let RouteDescription = wsdotRouteUtils.RouteDescription
 let getRouteParts = wsdotRouteUtils.getRouteParts
+```
+
+##### ES2015 #####
+```javascript
+import { RouteDescription, getRouteParts } from '../wsdot-route-utils'
+```
+
+#### browser ####
+```html
+<script src="path-to-modules/wsdot-route-utils/wsdot-route-utils.js"></script>
+<script src="path-to-modules/wsdot-route-utils/route-shields.js"></script>
 ```
 
 
@@ -44,6 +58,7 @@ console.log(desc.rrq) // 'ABERDN'
 console.log(desc.rrtDescription) // 'Couplet'
 console.log(desc.rrqDescription) // 'Aberdeen' (description may sometimes be just the same as `rrq`).
 console.log(desc.mainlineConnectionMP) // null
+console.log(desc.shield) // 'US'
 ```
 
 ```javascript
@@ -55,9 +70,8 @@ console.log(desc.rrq) // '09958'
 console.log(desc.rrtDescription) // 'Off Ramp, Dec'
 console.log(desc.rrqDescription) // 'at milepost 99.58'
 console.log(desc.mainlineConnectionMP) // 99.58
-
+console.log(desc.shield) // 'IS'
 ```
-
 
 API
 ---

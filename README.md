@@ -27,37 +27,37 @@ Sample
 ### Load module ###
 
 ```javascript
-let wsdotRouteUtils = require("wsdot-route-utils");
-let RouteDescription = wsdotRouteUtils.RouteDescription;
-let getRouteParts = wsdotRouteUtils.getRouteParts;
+let wsdotRouteUtils = require('wsdot-route-utils')
+let RouteDescription = wsdotRouteUtils.RouteDescription
+let getRouteParts = wsdotRouteUtils.getRouteParts
 ```
 
 
 ### Get info about a route ID ###
 
 ```javascript
-const srid = "101COABERDN";
-let desc = new RouteDescription(srid);
-console.log(desc.sr); // "101""
-console.log(desc.rrt); // "CO"
-console.log(desc.rrq); // "ABERDN"
-console.log(desc.rrtDescription); // "Couplet"
-console.log(desc.rrqDescription); // "Aberdeen" (description may sometimes be just the same as `rrq`).
-console.log(desc.mainlineConnectionMP); // null
+const srid = '101COABERDN'
+let desc = new RouteDescription(srid)
+console.log(desc.sr) // '101'
+console.log(desc.rrt) // 'CO'
+console.log(desc.rrq) // 'ABERDN'
+console.log(desc.rrtDescription) // 'Couplet'
+console.log(desc.rrqDescription) // 'Aberdeen' (description may sometimes be just the same as `rrq`).
+console.log(desc.mainlineConnectionMP) // null
+console.log(desc.shield) // 'US'
 ```
 
 ```javascript
-const srid = "005R109958";
-let desc = new RouteDescription(srid);
-console.log(desc.sr); // "005""
-console.log(desc.rrt); // "R1"
-console.log(desc.rrq); // "09958"
-console.log(desc.rrtDescription); // "Off Ramp, Dec"
-console.log(desc.rrqDescription); // "at milepost 99.58"
-console.log(desc.mainlineConnectionMP); // 99.58
-
+const srid = '005R109958'
+let desc = new RouteDescription(srid)
+console.log(desc.sr) // '005'
+console.log(desc.rrt) // 'R1'
+console.log(desc.rrq) // '09958'
+console.log(desc.rrtDescription) // 'Off Ramp, Dec'
+console.log(desc.rrqDescription) // 'at milepost 99.58'
+console.log(desc.mainlineConnectionMP) // 99.58
+console.log(desc.shield) // 'IS'
 ```
-
 
 API
 ---
@@ -65,50 +65,47 @@ API
 ## Modules
 
 <dl>
-<dt><a href="#module_route-info">route-info</a></dt>
-<dd></dd>
+<dt><a href="#module_route-shields">route-shields</a></dt>
+<dd><p>Lookup for route shield types</p>
+</dd>
 <dt><a href="#module_wsdot-route-utils">wsdot-route-utils</a></dt>
 <dd><p>Utilities for WSDOT Route Identifiers</p>
 </dd>
 </dl>
 
-<a name="module_route-info"></a>
+## Constants
 
-## route-info
+<dl>
+<dt></dt>
+<dd><p>A Map that will provide a shield type for a given state route number.</p>
+</dd>
+</dl>
 
-* [route-info](#module_route-info)
-    * [module.exports()](#exp_module_route-info--module.exports) ⇒ <code>module:route-info.RouteInfo</code> ⏏
-        * _static_
-            * [.RouteDirections](#module_route-info--module.exports.RouteDirections)
-            * [.getRouteInfo(routeId)](#module_route-info--module.exports.getRouteInfo) ⇒ <code>module:route-info--module.exports.RouteInfo</code>
-        * _inner_
-            * [~direction](#module_route-info--module.exports..direction) : <code>string</code>
+<a name="module_route-shields"></a>
 
-<a name="exp_module_route-info--module.exports"></a>
+## route-shields
+Lookup for route shield types
 
-### module.exports() ⇒ <code>module:route-info.RouteInfo</code> ⏏
-Generator function for looping through the route infos.
 
-**Kind**: Exported function  
-<a name="module_route-info--module.exports.RouteDirections"></a>
+* [route-shields](#module_route-shields)
+    * 
+        * [.getShieldType(routeId)](#module_route-shields--undefined.getShieldType) ⇒ <code>string</code>
 
-#### module.exports.RouteDirections
-**Kind**: static enum property of <code>[module.exports](#exp_module_route-info--module.exports)</code>  
-<a name="module_route-info--module.exports.getRouteInfo"></a>
+<a name="exp_module_route-shields--undefined"></a>
 
-#### module.exports.getRouteInfo(routeId) ⇒ <code>module:route-info--module.exports.RouteInfo</code>
-**Kind**: static method of <code>[module.exports](#exp_module_route-info--module.exports)</code>  
+### 
+A Map that will provide a shield type for a given state route number.
+
+**Kind**: global constant of <code>[route-shields](#module_route-shields)</code>  
+<a name="module_route-shields--undefined.getShieldType"></a>
+
+#### .getShieldType(routeId) ⇒ <code>string</code>
+**Kind**: static method of <code>[undefined](#exp_module_route-shields--undefined)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| routeId | <code>string</code> | route id |
+| routeId | <code>string</code> | route id. Only up to the first three characters (i.e., digits) are used by this function. |
 
-<a name="module_route-info--module.exports..direction"></a>
-
-#### module.exports~direction : <code>string</code>
-id
-
-**Kind**: inner property of <code>[module.exports](#exp_module_route-info--module.exports)</code>  
 <a name="module_wsdot-route-utils"></a>
 
 ## wsdot-route-utils
@@ -119,7 +116,7 @@ Utilities for WSDOT Route Identifiers
     * [.RouteDescription](#module_wsdot-route-utils.RouteDescription)
         * [new RouteDescription()](#new_module_wsdot-route-utils.RouteDescription_new)
         * _instance_
-            * [.routeInfo](#module_wsdot-route-utils.RouteDescription+routeInfo) ⇒ <code>module:route-info--module.exports.RouteInfo</code>
+            * [.shield](#module_wsdot-route-utils.RouteDescription+shield)
             * [.sr](#module_wsdot-route-utils.RouteDescription+sr) : <code>string</code>
             * [.rrt](#module_wsdot-route-utils.RouteDescription+rrt) : <code>string</code>
             * [.rrq](#module_wsdot-route-utils.RouteDescription+rrq) : <code>string</code>
@@ -148,7 +145,7 @@ Utilities for WSDOT Route Identifiers
 * [.RouteDescription](#module_wsdot-route-utils.RouteDescription)
     * [new RouteDescription()](#new_module_wsdot-route-utils.RouteDescription_new)
     * _instance_
-        * [.routeInfo](#module_wsdot-route-utils.RouteDescription+routeInfo) ⇒ <code>module:route-info--module.exports.RouteInfo</code>
+        * [.shield](#module_wsdot-route-utils.RouteDescription+shield)
         * [.sr](#module_wsdot-route-utils.RouteDescription+sr) : <code>string</code>
         * [.rrt](#module_wsdot-route-utils.RouteDescription+rrt) : <code>string</code>
         * [.rrq](#module_wsdot-route-utils.RouteDescription+rrq) : <code>string</code>
@@ -169,10 +166,10 @@ Utilities for WSDOT Route Identifiers
 #### new RouteDescription()
 Provides a description of a route.
 
-<a name="module_wsdot-route-utils.RouteDescription+routeInfo"></a>
+<a name="module_wsdot-route-utils.RouteDescription+shield"></a>
 
-#### routeDescription.routeInfo ⇒ <code>module:route-info--module.exports.RouteInfo</code>
-Gets information about a route.
+#### routeDescription.shield
+Gets the type of shield of a WA state route: "IS", "US", or "SR"
 
 **Kind**: instance property of <code>[RouteDescription](#module_wsdot-route-utils.RouteDescription)</code>  
 <a name="module_wsdot-route-utils.RouteDescription+sr"></a>

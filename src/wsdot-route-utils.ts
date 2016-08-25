@@ -3,6 +3,9 @@
  * @module wsdot-route-utils
  */
 
+import { getRouteInfo, RouteInfo } from "./route-info";
+
+export { getRouteInfo }
 
 /*
 ==RRTs (Related Roadway Type)==
@@ -146,18 +149,19 @@ export function getRouteParts(routeId: string, throwErrorOnMatchFail: boolean = 
 
 /**
  * Provides a description of a route.
+ * @class module:wsdot-route-utils.RouteDescription
  */
-export default class RouteDescription {
+export class RouteDescription {
     private _sr: string;
     private _rrt: string;
     private _rrq: string;
     private _isDecrease: boolean = null;
+    private _routeInfo: RouteInfo;
 
     /**
      * Creates new instance.
      * @param {string} routeId - route ID
      * @param {boolean} canIncludeDirection - Indicates if "d" suffix is allowed in ID to show direction.
-     * @constructor
      */
     constructor(routeId: string, canIncludeDirection: boolean = false) {
         if (canIncludeDirection) {
@@ -168,6 +172,19 @@ export default class RouteDescription {
             [this._sr, this._rrt, this._rrq] = getRouteParts(routeId, true, canIncludeDirection);
         }
     }
+
+
+    /**
+     * Gets information about a route.
+     * @returns {module:route-info.RouteInfo}
+     */
+    public get routeInfo(): RouteInfo {
+        if (this._routeInfo === undefined) {
+            this._routeInfo = getRouteInfo(`${this._sr}${this._rrt}${this._rrq}`);
+        }
+        return this._routeInfo;
+    }
+
 
     /**
      * Mainline component of route ID.
@@ -191,6 +208,14 @@ export default class RouteDescription {
      */
     public get rrq(): string {
         return this._rrq;
+    }
+
+    /**
+     * Indicates if this is a mainline route ID.
+     * I.e., no RRT or RRQ.
+     */
+    public get isMainline(): boolean {
+        return !this.rrt && !this.rrq;
     }
 
 
@@ -227,6 +252,22 @@ export default class RouteDescription {
     }
 
     /**
+     * Indicates if the route is a "local collector" type.
+     * @returns {boolean}
+     */
+    public get isLocalColector(): boolean {
+        return this.rrt && /((LX)|(F[DI]))/.test(this.rrt);
+    }
+
+    /**
+     * Indicates if the route is a ramp.
+     * @returns {boolean}
+     */
+    public get isRamp(): boolean {
+        return this.rrt && /[PQRS][1-9]/.test(this.rrt);
+    }
+
+    /**
      * Detailed description of the RRQ.
      * @member {string}
      */
@@ -247,6 +288,6 @@ export default class RouteDescription {
      * @returns {string}
      */
     public toString() {
-        return `${this.sr}${this.rrt || ""}${this.rrq || ""}`;
+        return `${this.sr}${this.rrt || ""}${this.rrq || ""}${this.isDecrease === true ? "d" : ""}`;
     }
 }

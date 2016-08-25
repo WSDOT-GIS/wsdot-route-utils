@@ -28,7 +28,7 @@ Sample
 
 ```javascript
 let wsdotRouteUtils = require("wsdot-route-utils");
-let RouteDescription = wsdotRouteUtils.default;
+let RouteDescription = wsdotRouteUtils.RouteDescription;
 let getRouteParts = wsdotRouteUtils.getRouteParts;
 ```
 
@@ -62,6 +62,53 @@ console.log(desc.mainlineConnectionMP); // 99.58
 API
 ---
 
+## Modules
+
+<dl>
+<dt><a href="#module_route-info">route-info</a></dt>
+<dd></dd>
+<dt><a href="#module_wsdot-route-utils">wsdot-route-utils</a></dt>
+<dd><p>Utilities for WSDOT Route Identifiers</p>
+</dd>
+</dl>
+
+<a name="module_route-info"></a>
+
+## route-info
+
+* [route-info](#module_route-info)
+    * [module.exports()](#exp_module_route-info--module.exports) ⇒ <code>module:route-info.RouteInfo</code> ⏏
+        * _static_
+            * [.RouteDirections](#module_route-info--module.exports.RouteDirections)
+            * [.getRouteInfo(routeId)](#module_route-info--module.exports.getRouteInfo) ⇒ <code>module:route-info--module.exports.RouteInfo</code>
+        * _inner_
+            * [~direction](#module_route-info--module.exports..direction) : <code>string</code>
+
+<a name="exp_module_route-info--module.exports"></a>
+
+### module.exports() ⇒ <code>module:route-info.RouteInfo</code> ⏏
+Generator function for looping through the route infos.
+
+**Kind**: Exported function  
+<a name="module_route-info--module.exports.RouteDirections"></a>
+
+#### module.exports.RouteDirections
+**Kind**: static enum of <code>[module.exports](#exp_module_route-info--module.exports)</code>  
+<a name="module_route-info--module.exports.getRouteInfo"></a>
+
+#### module.exports.getRouteInfo(routeId) ⇒ <code>module:route-info--module.exports.RouteInfo</code>
+**Kind**: static method of <code>[module.exports](#exp_module_route-info--module.exports)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| routeId | <code>string</code> | route id |
+
+<a name="module_route-info--module.exports..direction"></a>
+
+#### module.exports~direction : <code>string</code>
+id
+
+**Kind**: inner property of <code>[module.exports](#exp_module_route-info--module.exports)</code>  
 <a name="module_wsdot-route-utils"></a>
 
 ## wsdot-route-utils
@@ -69,33 +116,138 @@ Utilities for WSDOT Route Identifiers
 
 
 * [wsdot-route-utils](#module_wsdot-route-utils)
-    * [module.exports](#exp_module_wsdot-route-utils--module.exports) ⏏
-        * [new module.exports(routeId, canIncludeDirection)](#new_module_wsdot-route-utils--module.exports_new)
+    * [.RouteDescription](#module_wsdot-route-utils.RouteDescription)
+        * [new RouteDescription()](#new_module_wsdot-route-utils.RouteDescription_new)
         * _instance_
-            * [.sr](#module_wsdot-route-utils--module.exports+sr) : <code>string</code>
-            * [.rrt](#module_wsdot-route-utils--module.exports+rrt) : <code>string</code>
-            * [.rrq](#module_wsdot-route-utils--module.exports+rrq) : <code>string</code>
-            * [.isDecrease](#module_wsdot-route-utils--module.exports+isDecrease) : <code>boolean</code>
-            * [.rrtDescription](#module_wsdot-route-utils--module.exports+rrtDescription) : <code>string</code>
-            * [.mainlineConnectionMP](#module_wsdot-route-utils--module.exports+mainlineConnectionMP) : <code>number</code>
-            * [.rrqDescription](#module_wsdot-route-utils--module.exports+rrqDescription) : <code>string</code>
-            * [.toString()](#module_wsdot-route-utils--module.exports+toString) ⇒ <code>string</code>
+            * [.routeInfo](#module_wsdot-route-utils.RouteDescription+routeInfo) ⇒ <code>module:route-info--module.exports.RouteInfo</code>
+            * [.sr](#module_wsdot-route-utils.RouteDescription+sr) : <code>string</code>
+            * [.rrt](#module_wsdot-route-utils.RouteDescription+rrt) : <code>string</code>
+            * [.rrq](#module_wsdot-route-utils.RouteDescription+rrq) : <code>string</code>
+            * [.isMainline](#module_wsdot-route-utils.RouteDescription+isMainline)
+            * [.isDecrease](#module_wsdot-route-utils.RouteDescription+isDecrease) : <code>boolean</code>
+            * [.rrtDescription](#module_wsdot-route-utils.RouteDescription+rrtDescription) : <code>string</code>
+            * [.mainlineConnectionMP](#module_wsdot-route-utils.RouteDescription+mainlineConnectionMP) : <code>number</code>
+            * [.isLocalColector](#module_wsdot-route-utils.RouteDescription+isLocalColector) ⇒ <code>boolean</code>
+            * [.isRamp](#module_wsdot-route-utils.RouteDescription+isRamp) ⇒ <code>boolean</code>
+            * [.rrqDescription](#module_wsdot-route-utils.RouteDescription+rrqDescription) : <code>string</code>
+            * [.toString()](#module_wsdot-route-utils.RouteDescription+toString) ⇒ <code>string</code>
         * _static_
-            * [.srRegex](#module_wsdot-route-utils--module.exports.srRegex) : <code>Regexp</code>
-            * [.srdRegex](#module_wsdot-route-utils--module.exports.srdRegex) : <code>Regexp</code>
-            * [.relaxedRegex](#module_wsdot-route-utils--module.exports.relaxedRegex) : <code>Regexp</code>
-            * [.relaxedWithDirRegexp](#module_wsdot-route-utils--module.exports.relaxedWithDirRegexp) : <code>Regexp</code>
-            * [.getRouteParts(routeId, [throwErrorOnMatchFail])](#module_wsdot-route-utils--module.exports.getRouteParts) ⇒ <code>Array.&lt;string&gt;</code>
+            * [.RouteDescription](#module_wsdot-route-utils.RouteDescription.RouteDescription)
+                * [new RouteDescription(routeId, canIncludeDirection)](#new_module_wsdot-route-utils.RouteDescription.RouteDescription_new)
+    * [.srRegex](#module_wsdot-route-utils.srRegex) : <code>Regexp</code>
+    * [.srdRegex](#module_wsdot-route-utils.srdRegex) : <code>Regexp</code>
+    * [.relaxedRegex](#module_wsdot-route-utils.relaxedRegex) : <code>Regexp</code>
+    * [.relaxedWithDirRegexp](#module_wsdot-route-utils.relaxedWithDirRegexp) : <code>Regexp</code>
+    * [.getRouteParts(routeId, [throwErrorOnMatchFail])](#module_wsdot-route-utils.getRouteParts) ⇒ <code>Array.&lt;string&gt;</code>
 
-<a name="exp_module_wsdot-route-utils--module.exports"></a>
+<a name="module_wsdot-route-utils.RouteDescription"></a>
 
-### module.exports ⏏
+### wsdot-route-utils.RouteDescription
+**Kind**: static class of <code>[wsdot-route-utils](#module_wsdot-route-utils)</code>  
+
+* [.RouteDescription](#module_wsdot-route-utils.RouteDescription)
+    * [new RouteDescription()](#new_module_wsdot-route-utils.RouteDescription_new)
+    * _instance_
+        * [.routeInfo](#module_wsdot-route-utils.RouteDescription+routeInfo) ⇒ <code>module:route-info--module.exports.RouteInfo</code>
+        * [.sr](#module_wsdot-route-utils.RouteDescription+sr) : <code>string</code>
+        * [.rrt](#module_wsdot-route-utils.RouteDescription+rrt) : <code>string</code>
+        * [.rrq](#module_wsdot-route-utils.RouteDescription+rrq) : <code>string</code>
+        * [.isMainline](#module_wsdot-route-utils.RouteDescription+isMainline)
+        * [.isDecrease](#module_wsdot-route-utils.RouteDescription+isDecrease) : <code>boolean</code>
+        * [.rrtDescription](#module_wsdot-route-utils.RouteDescription+rrtDescription) : <code>string</code>
+        * [.mainlineConnectionMP](#module_wsdot-route-utils.RouteDescription+mainlineConnectionMP) : <code>number</code>
+        * [.isLocalColector](#module_wsdot-route-utils.RouteDescription+isLocalColector) ⇒ <code>boolean</code>
+        * [.isRamp](#module_wsdot-route-utils.RouteDescription+isRamp) ⇒ <code>boolean</code>
+        * [.rrqDescription](#module_wsdot-route-utils.RouteDescription+rrqDescription) : <code>string</code>
+        * [.toString()](#module_wsdot-route-utils.RouteDescription+toString) ⇒ <code>string</code>
+    * _static_
+        * [.RouteDescription](#module_wsdot-route-utils.RouteDescription.RouteDescription)
+            * [new RouteDescription(routeId, canIncludeDirection)](#new_module_wsdot-route-utils.RouteDescription.RouteDescription_new)
+
+<a name="new_module_wsdot-route-utils.RouteDescription_new"></a>
+
+#### new RouteDescription()
 Provides a description of a route.
 
-**Kind**: Exported class  
-<a name="new_module_wsdot-route-utils--module.exports_new"></a>
+<a name="module_wsdot-route-utils.RouteDescription+routeInfo"></a>
 
-#### new module.exports(routeId, canIncludeDirection)
+#### routeDescription.routeInfo ⇒ <code>module:route-info--module.exports.RouteInfo</code>
+Gets information about a route.
+
+**Kind**: instance property of <code>[RouteDescription](#module_wsdot-route-utils.RouteDescription)</code>  
+<a name="module_wsdot-route-utils.RouteDescription+sr"></a>
+
+#### routeDescription.sr : <code>string</code>
+Mainline component of route ID.
+
+**Kind**: instance property of <code>[RouteDescription](#module_wsdot-route-utils.RouteDescription)</code>  
+<a name="module_wsdot-route-utils.RouteDescription+rrt"></a>
+
+#### routeDescription.rrt : <code>string</code>
+Related Route Type (RRT) component.
+
+**Kind**: instance property of <code>[RouteDescription](#module_wsdot-route-utils.RouteDescription)</code>  
+<a name="module_wsdot-route-utils.RouteDescription+rrq"></a>
+
+#### routeDescription.rrq : <code>string</code>
+Related Route Qualifier (RRQ).
+
+**Kind**: instance property of <code>[RouteDescription](#module_wsdot-route-utils.RouteDescription)</code>  
+<a name="module_wsdot-route-utils.RouteDescription+isMainline"></a>
+
+#### routeDescription.isMainline
+Indicates if this is a mainline route ID.I.e., no RRT or RRQ.
+
+**Kind**: instance property of <code>[RouteDescription](#module_wsdot-route-utils.RouteDescription)</code>  
+<a name="module_wsdot-route-utils.RouteDescription+isDecrease"></a>
+
+#### routeDescription.isDecrease : <code>boolean</code>
+Indicates decreasing direction was specified.If the "canIncludeDirection" option was set to falsein the constructor, this value will be null.
+
+**Kind**: instance property of <code>[RouteDescription](#module_wsdot-route-utils.RouteDescription)</code>  
+<a name="module_wsdot-route-utils.RouteDescription+rrtDescription"></a>
+
+#### routeDescription.rrtDescription : <code>string</code>
+More detailed description of the RRT.
+
+**Kind**: instance property of <code>[RouteDescription](#module_wsdot-route-utils.RouteDescription)</code>  
+<a name="module_wsdot-route-utils.RouteDescription+mainlineConnectionMP"></a>
+
+#### routeDescription.mainlineConnectionMP : <code>number</code>
+If applicable, milepost where this route either leaves or joins the mainline.Value will be null when not applicable.
+
+**Kind**: instance property of <code>[RouteDescription](#module_wsdot-route-utils.RouteDescription)</code>  
+<a name="module_wsdot-route-utils.RouteDescription+isLocalColector"></a>
+
+#### routeDescription.isLocalColector ⇒ <code>boolean</code>
+Indicates if the route is a "local collector" type.
+
+**Kind**: instance property of <code>[RouteDescription](#module_wsdot-route-utils.RouteDescription)</code>  
+<a name="module_wsdot-route-utils.RouteDescription+isRamp"></a>
+
+#### routeDescription.isRamp ⇒ <code>boolean</code>
+Indicates if the route is a ramp.
+
+**Kind**: instance property of <code>[RouteDescription](#module_wsdot-route-utils.RouteDescription)</code>  
+<a name="module_wsdot-route-utils.RouteDescription+rrqDescription"></a>
+
+#### routeDescription.rrqDescription : <code>string</code>
+Detailed description of the RRQ.
+
+**Kind**: instance property of <code>[RouteDescription](#module_wsdot-route-utils.RouteDescription)</code>  
+<a name="module_wsdot-route-utils.RouteDescription+toString"></a>
+
+#### routeDescription.toString() ⇒ <code>string</code>
+Returns the route as a string.
+
+**Kind**: instance method of <code>[RouteDescription](#module_wsdot-route-utils.RouteDescription)</code>  
+<a name="module_wsdot-route-utils.RouteDescription.RouteDescription"></a>
+
+#### RouteDescription.RouteDescription
+**Kind**: static class of <code>[RouteDescription](#module_wsdot-route-utils.RouteDescription)</code>  
+<a name="new_module_wsdot-route-utils.RouteDescription.RouteDescription_new"></a>
+
+##### new RouteDescription(routeId, canIncludeDirection)
 Creates new instance.
 
 
@@ -104,85 +256,37 @@ Creates new instance.
 | routeId | <code>string</code> |  | route ID |
 | canIncludeDirection | <code>boolean</code> | <code>false</code> | Indicates if "d" suffix is allowed in ID to show direction. |
 
-<a name="module_wsdot-route-utils--module.exports+sr"></a>
+<a name="module_wsdot-route-utils.srRegex"></a>
 
-#### module.exports.sr : <code>string</code>
-Mainline component of route ID.
-
-**Kind**: instance property of <code>[module.exports](#exp_module_wsdot-route-utils--module.exports)</code>  
-<a name="module_wsdot-route-utils--module.exports+rrt"></a>
-
-#### module.exports.rrt : <code>string</code>
-Related Route Type (RRT) component.
-
-**Kind**: instance property of <code>[module.exports](#exp_module_wsdot-route-utils--module.exports)</code>  
-<a name="module_wsdot-route-utils--module.exports+rrq"></a>
-
-#### module.exports.rrq : <code>string</code>
-Related Route Qualifier (RRQ).
-
-**Kind**: instance property of <code>[module.exports](#exp_module_wsdot-route-utils--module.exports)</code>  
-<a name="module_wsdot-route-utils--module.exports+isDecrease"></a>
-
-#### module.exports.isDecrease : <code>boolean</code>
-Indicates decreasing direction was specified.If the "canIncludeDirection" option was set to falsein the constructor, this value will be null.
-
-**Kind**: instance property of <code>[module.exports](#exp_module_wsdot-route-utils--module.exports)</code>  
-<a name="module_wsdot-route-utils--module.exports+rrtDescription"></a>
-
-#### module.exports.rrtDescription : <code>string</code>
-More detailed description of the RRT.
-
-**Kind**: instance property of <code>[module.exports](#exp_module_wsdot-route-utils--module.exports)</code>  
-<a name="module_wsdot-route-utils--module.exports+mainlineConnectionMP"></a>
-
-#### module.exports.mainlineConnectionMP : <code>number</code>
-If applicable, milepost where this route either leaves or joins the mainline.Value will be null when not applicable.
-
-**Kind**: instance property of <code>[module.exports](#exp_module_wsdot-route-utils--module.exports)</code>  
-<a name="module_wsdot-route-utils--module.exports+rrqDescription"></a>
-
-#### module.exports.rrqDescription : <code>string</code>
-Detailed description of the RRQ.
-
-**Kind**: instance property of <code>[module.exports](#exp_module_wsdot-route-utils--module.exports)</code>  
-<a name="module_wsdot-route-utils--module.exports+toString"></a>
-
-#### module.exports.toString() ⇒ <code>string</code>
-Returns the route as a string.
-
-**Kind**: instance method of <code>[module.exports](#exp_module_wsdot-route-utils--module.exports)</code>  
-<a name="module_wsdot-route-utils--module.exports.srRegex"></a>
-
-#### module.exports.srRegex : <code>Regexp</code>
+### wsdot-route-utils.srRegex : <code>Regexp</code>
 Matches state route format, with captures for SR, RRT, and RRQ. First element in array will be entire match.
 
-**Kind**: static constant of <code>[module.exports](#exp_module_wsdot-route-utils--module.exports)</code>  
-<a name="module_wsdot-route-utils--module.exports.srdRegex"></a>
+**Kind**: static constant of <code>[wsdot-route-utils](#module_wsdot-route-utils)</code>  
+<a name="module_wsdot-route-utils.srdRegex"></a>
 
-#### module.exports.srdRegex : <code>Regexp</code>
+### wsdot-route-utils.srdRegex : <code>Regexp</code>
 Matches state route + optional direction format, with captures for SR, RRT, RRQ, and direction. First element in array will be entire match.
 
-**Kind**: static constant of <code>[module.exports](#exp_module_wsdot-route-utils--module.exports)</code>  
-<a name="module_wsdot-route-utils--module.exports.relaxedRegex"></a>
+**Kind**: static constant of <code>[wsdot-route-utils](#module_wsdot-route-utils)</code>  
+<a name="module_wsdot-route-utils.relaxedRegex"></a>
 
-#### module.exports.relaxedRegex : <code>Regexp</code>
+### wsdot-route-utils.relaxedRegex : <code>Regexp</code>
 A more relaxed Regexp than srRegex, which doesn't check for specific RRTs, only that they are two characters long if present.
 
-**Kind**: static constant of <code>[module.exports](#exp_module_wsdot-route-utils--module.exports)</code>  
-<a name="module_wsdot-route-utils--module.exports.relaxedWithDirRegexp"></a>
+**Kind**: static constant of <code>[wsdot-route-utils](#module_wsdot-route-utils)</code>  
+<a name="module_wsdot-route-utils.relaxedWithDirRegexp"></a>
 
-#### module.exports.relaxedWithDirRegexp : <code>Regexp</code>
+### wsdot-route-utils.relaxedWithDirRegexp : <code>Regexp</code>
 Like [relaxedRegex](relaxedRegex), but allows optional "d" suffix.
 
-**Kind**: static constant of <code>[module.exports](#exp_module_wsdot-route-utils--module.exports)</code>  
+**Kind**: static constant of <code>[wsdot-route-utils](#module_wsdot-route-utils)</code>  
 **See**: [relaxedRegex](relaxedRegex)  
-<a name="module_wsdot-route-utils--module.exports.getRouteParts"></a>
+<a name="module_wsdot-route-utils.getRouteParts"></a>
 
-#### module.exports.getRouteParts(routeId, [throwErrorOnMatchFail]) ⇒ <code>Array.&lt;string&gt;</code>
+### wsdot-route-utils.getRouteParts(routeId, [throwErrorOnMatchFail]) ⇒ <code>Array.&lt;string&gt;</code>
 Splits a state route identifer into its component SR, RRT, and RRQ parts.If the input route ID is not in the expected format, one of two thingswill happen according to the value of the "throwErrorOnMatchFail" parameter.If set to false, null will be returned. If set to true, an Error will be thrown.
 
-**Kind**: static method of <code>[module.exports](#exp_module_wsdot-route-utils--module.exports)</code>  
+**Kind**: static method of <code>[wsdot-route-utils](#module_wsdot-route-utils)</code>  
 **Returns**: <code>Array.&lt;string&gt;</code> - An array of three elements: SR, RRT, and RRQ.The elements at position 1 and 2 may be null if a route has no RRT or RRQ(as would be the case with a mainline).Will be null if the routeId is not in the expected format and if throwErrorOnMatchFail is false.  
 
 | Param | Type | Default | Description |

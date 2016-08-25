@@ -5,9 +5,7 @@
         "noImplicitAny": true,
         "sourceMap": false,
         "declaration": true,
+        "rootDir": "src",
         "outDir": "es2015"
-    },
-    "files": [
-        "index.ts"
-    ]
+    }
 }

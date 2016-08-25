@@ -2,9 +2,7 @@
 
 'use strict'
 
-let wsdotRouteUtils = require('../wsdot-route-utils')
-let RouteDescription = wsdotRouteUtils.RouteDescription
-let getRouteParts = wsdotRouteUtils.getRouteParts
+import { RouteDescription, getRouteParts } from '../wsdot-route-utils'
 
 describe('RouteDescription', () => {
   it("won't parse invalidly formatted routes", () => {

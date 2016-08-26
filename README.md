@@ -26,10 +26,23 @@ Sample
 
 ### Load module ###
 
+#### JavaScript ####
+
+##### ES5 #####
 ```javascript
 let wsdotRouteUtils = require('wsdot-route-utils')
 let RouteDescription = wsdotRouteUtils.RouteDescription
-let getRouteParts = wsdotRouteUtils.getRouteParts
+```
+
+##### ES2015 #####
+```javascript
+import { RouteDescription } from 'wsdot-route-utils'
+```
+
+#### browser ####
+```html
+<script src="path-to-modules/wsdot-route-utils/wsdot-route-utils.js"></script>
+<script src="path-to-modules/wsdot-route-utils/route-shields.js"></script>
 ```
 
 
@@ -73,14 +86,6 @@ API
 </dd>
 </dl>
 
-## Constants
-
-<dl>
-<dt></dt>
-<dd><p>A Map that will provide a shield type for a given state route number.</p>
-</dd>
-</dl>
-
 <a name="module_route-shields"></a>
 
 ## route-shields
@@ -88,19 +93,20 @@ Lookup for route shield types
 
 
 * [route-shields](#module_route-shields)
-    * 
-        * [.getShieldType(routeId)](#module_route-shields--undefined.getShieldType) ⇒ <code>string</code>
+    * [.shields](#module_route-shields.shields) : <code>Map.&lt;number, ShieldType&gt;</code>
+    * [.getShieldType(routeId)](#module_route-shields.getShieldType) ⇒ <code>string</code>
 
-<a name="exp_module_route-shields--undefined"></a>
+<a name="module_route-shields.shields"></a>
 
-### 
+### route-shields.shields : <code>Map.&lt;number, ShieldType&gt;</code>
 A Map that will provide a shield type for a given state route number.
 
-**Kind**: global constant of <code>[route-shields](#module_route-shields)</code>  
-<a name="module_route-shields--undefined.getShieldType"></a>
+**Kind**: static constant of <code>[route-shields](#module_route-shields)</code>  
+**Read only**: true  
+<a name="module_route-shields.getShieldType"></a>
 
-#### .getShieldType(routeId) ⇒ <code>string</code>
-**Kind**: static method of <code>[undefined](#exp_module_route-shields--undefined)</code>  
+### route-shields.getShieldType(routeId) ⇒ <code>string</code>
+**Kind**: static method of <code>[route-shields](#module_route-shields)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |

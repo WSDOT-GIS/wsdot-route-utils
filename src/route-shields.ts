@@ -11,7 +11,8 @@ export type ShieldType = "US" | "SR" | "IS";
 
 /**
  * A Map that will provide a shield type for a given state route number.
- * @const {Map.<number, ShieldType>} module:route-shields
+ * @type {Map.<number, ShieldType>} module:route-shields
+ * @readonly
  */
 export const shields = new Map<number, ShieldType>([
     [2, "US"],

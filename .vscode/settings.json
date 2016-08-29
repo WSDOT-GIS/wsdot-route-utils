@@ -2,7 +2,8 @@
 {
     "files.exclude": {
         "**/*.{js,d.ts}": { "when": "$(basename).ts" },
-        "*.js": true,
+        "route-shields.js": true,
+        "wsdot-route-utils.js": true,
         "spec/**/*Spec.js": true,
         "es2015": true,
         "**/.git": true,

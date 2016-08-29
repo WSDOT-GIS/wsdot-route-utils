@@ -9,7 +9,7 @@
     "createdocs": "jsdoc2md es2015/*.js --template README.hbs > README.md",
     "prepublish": "tsc && babel es2015 -d . && npm run createdocs",
     "pretest": "babel spec/wsdotRouteUtils6pec.js > spec/wsdotRouteUtilsSpec.js",
-    "test": "jasmine"
+    "test": "jasmine && karma start --single-run --browsers PhantomJS"
   },
   "files": [
     "wsdot-route-utils.js",
@@ -43,6 +43,11 @@
     "eslint-plugin-standard": "^2.0.0",
     "jasmine": "^2.4.1",
     "jsdoc-to-markdown": "^2.0.0-alpha.12",
+    "karma": "^1.2.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-firefox-launcher": "^1.0.0",
+    "karma-jasmine": "^1.0.2",
+    "karma-phantomjs-launcher": "^1.0.1",
     "tslint": "^3.15.1",
     "typescript": "^1.8.10",
     "typings": "^1.3.3"

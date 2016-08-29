@@ -37,7 +37,7 @@
     "babel-plugin-transform-strict-mode": "^6.11.3",
     "babel-polyfill": "^6.13.0",
     "babel-preset-es2015": "^6.14.0",
-    "eslint": "^3.3.1",
+    "eslint": "^3.4.0",
     "eslint-config-standard": "^6.0.0",
     "eslint-plugin-promise": "^2.0.1",
     "eslint-plugin-standard": "^2.0.0",
@@ -45,7 +45,7 @@
     "jsdoc-to-markdown": "^2.0.0-alpha.12",
     "tslint": "^3.15.1",
     "typescript": "^1.8.10",
-    "typings": "^1.3.2"
+    "typings": "^1.3.3"
   },
   "repository": {
     "type": "git",

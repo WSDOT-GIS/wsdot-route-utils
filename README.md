@@ -91,18 +91,6 @@ API
 ## route-shields
 Lookup for route shield types
 
-
-* [route-shields](#module_route-shields)
-    * [.shields](#module_route-shields.shields) : <code>Map.&lt;number, ShieldType&gt;</code>
-    * [.getShieldType(routeId)](#module_route-shields.getShieldType) ⇒ <code>string</code>
-
-<a name="module_route-shields.shields"></a>
-
-### route-shields.shields : <code>Map.&lt;number, ShieldType&gt;</code>
-A Map that will provide a shield type for a given state route number.
-
-**Kind**: static constant of <code>[route-shields](#module_route-shields)</code>  
-**Read only**: true  
 <a name="module_route-shields.getShieldType"></a>
 
 ### route-shields.getShieldType(routeId) ⇒ <code>string</code>

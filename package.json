@@ -9,7 +9,7 @@
     "createdocs": "jsdoc2md es2015/*.js --template README.hbs > README.md",
     "prepublish": "tsc && babel es2015 -d . && node scripts/movets.js && npm run createdocs",
     "pretest": "babel spec/wsdotRouteUtils6pec.js > spec/wsdotRouteUtilsSpec.js",
-    "test": "jasmine && karma start --single-run --browsers PhantomJS"
+    "test": "jasmine && karma start --single-run --browsers PhantomJS,Firefox"
   },
   "files": [
     "wsdot-route-utils.js",

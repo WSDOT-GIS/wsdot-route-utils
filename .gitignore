@@ -1,7 +1,3 @@
-wsdot-route-utils.js
-wsdot-route-utils.d.ts
-**/route-shields.js
-**/route-shields.d.ts
 spec/*Spec.js
 
 typings

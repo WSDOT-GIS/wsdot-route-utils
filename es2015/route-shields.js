@@ -2,31 +2,22 @@
  * Lookup for route shield types
  * @module route-shields
  */
-
-/**
- * "US", "SR", "IS"
- * @typedef {string} RouteType
- */
-export type ShieldType = "US" | "SR" | "IS";
-
 // Create a symbol for each route shield type.
 const US_SYMBOL = Symbol("US");
 const IS_SYMBOL = Symbol("IS");
 const SR_SYMBOL = Symbol("SR");
-
-const shieldTypes = new Map<Symbol, ShieldType>([
+const shieldTypes = new Map([
     [US_SYMBOL, "US"],
     [IS_SYMBOL, "IS"],
     [SR_SYMBOL, "SR"]
 ]);
-
 /**
  * A Map that will provide a shield type for a given state route number.
  * @type {Map.<number, Symbol>} module:route-shields
  * @private
  * @readonly
  */
-const shields = new Map<number, Symbol>([
+const shields = new Map([
     [2, US_SYMBOL],
     [3, SR_SYMBOL],
     [4, SR_SYMBOL],
@@ -216,7 +207,6 @@ const shields = new Map<number, Symbol>([
     [970, SR_SYMBOL],
     [971, SR_SYMBOL]
 ]);
-
 /**
  * @function module:route-shields.getShieldType
  * @param {string} routeId - route id.
@@ -224,7 +214,7 @@ const shields = new Map<number, Symbol>([
  * are used by this function.
  * @returns {string}
  */
-export function getShieldType(routeId: string): ShieldType {
+export function getShieldType(routeId) {
     const re = /^\d{1,3}/;
     let match = routeId.match(re);
     if (!match) {

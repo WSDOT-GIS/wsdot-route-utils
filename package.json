@@ -6,8 +6,9 @@
   "esnext:main": "es2015/wsdot-route-utils.js",
   "typings": "wsdot-route-utils.d.ts",
   "scripts": {
-    "createdocs": "jsdoc2md es2015/*.js --template README.hbs > README.md",
-    "prepublish": "tsc && babel es2015 -d . && node scripts/movets.js && npm run createdocs",
+    "createdocs": "jsdoc2md \"es2015/*.js\" --template README.hbs > README.md",
+    "build": "tsc && babel es2015 -d . && node scripts/movets.js",
+    "prepublish": "npm run build && npm run createdocs",
     "pretest": "babel spec/wsdotRouteUtils6pec.js > spec/wsdotRouteUtilsSpec.js",
     "test": "jasmine && karma start --single-run --browsers PhantomJS,Firefox"
   },
@@ -45,7 +46,7 @@
     "eslint-plugin-standard": "^2.0.0",
     "fs-extra": "^0.30.0",
     "jasmine": "^2.4.1",
-    "jsdoc-to-markdown": "^2.0.0-alpha.12",
+    "jsdoc-to-markdown": "^2.0.1",
     "karma": "^1.2.0",
     "karma-chrome-launcher": "^2.0.0",
     "karma-firefox-launcher": "^1.0.0",

@@ -14,4 +14,4 @@ export declare type ShieldType = "US" | "SR" | "IS";
  * are used by this function.
  * @returns {string}
  */
-export declare function getShieldType(routeId: string): ShieldType;
+export declare function getShieldType(routeId: string): ShieldType | null;

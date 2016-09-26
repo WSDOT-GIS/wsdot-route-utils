@@ -141,8 +141,9 @@ export function getRouteParts(routeId: string, throwErrorOnMatchFail: boolean = 
         });
     } else if (throwErrorOnMatchFail) {
         throw new Error(`${routeId} is not a valid WA state route identifier.`);
+    } else {
+        return null;
     }
-    return null;
 }
 
 /**
@@ -150,31 +151,36 @@ export function getRouteParts(routeId: string, throwErrorOnMatchFail: boolean = 
  * @class module:wsdot-route-utils.RouteDescription
  */
 export class RouteDescription {
-    private _sr: string;
-    private _rrt: string;
-    private _rrq: string;
-    private _isDecrease: boolean = null;
-    private _shield: ShieldType = undefined;
+    private _sr: string | null;
+    private _rrt: string | null;
+    private _rrq: string | null;
+    private _isDecrease: boolean | null = null;
+    private _shield: ShieldType | null | undefined = undefined;
 
     /**
      * Creates new instance.
      * @param {string} routeId - route ID
-     * @param {boolean} canIncludeDirection - Indicates if "d" suffix is allowed in ID to show direction.
+     * @param {boolean} [canIncludeDirection=false] - Indicates if "d" suffix is allowed in ID to show direction.
      */
     constructor(routeId: string, canIncludeDirection: boolean = false) {
+        let routeParts = getRouteParts(routeId, true, canIncludeDirection);
         if (canIncludeDirection) {
-            let d: string;
-            [this._sr, this._rrt, this._rrq, d] = getRouteParts(routeId, true, canIncludeDirection);
-            this._isDecrease = d === "d" ? true : false;
+            let d: string | null;
+            if (routeParts !== null) {
+                [this._sr, this._rrt, this._rrq, d] = routeParts;
+                this._isDecrease = d === "d";
+            }
         } else {
-            [this._sr, this._rrt, this._rrq] = getRouteParts(routeId, true, canIncludeDirection);
+            if (routeParts != null) {
+                [this._sr, this._rrt, this._rrq] = routeParts;
+            }
         }
     }
 
     /**
      * Gets the type of shield of a WA state route: "IS", "US", or "SR"
      */
-    public get shield(): ShieldType {
+    public get shield(): ShieldType | null {
         if (this._shield === undefined) {
             if (!this.sr) {
                 this._shield = null;
@@ -189,7 +195,7 @@ export class RouteDescription {
      * Mainline component of route ID.
      * @member {string}
      */
-    public get sr(): string {
+    public get sr(): string | null {
         return this._sr;
     }
 
@@ -197,7 +203,7 @@ export class RouteDescription {
      * Related Route Type (RRT) component.
      * @member {string}
      */
-    public get rrt(): string {
+    public get rrt(): string | null {
         return this._rrt;
     }
 
@@ -205,7 +211,7 @@ export class RouteDescription {
      * Related Route Qualifier (RRQ).
      * @member {string}
      */
-    public get rrq(): string {
+    public get rrq(): string | null {
         return this._rrq;
     }
 
@@ -213,7 +219,7 @@ export class RouteDescription {
      * Indicates if this is a mainline route ID.
      * I.e., no RRT or RRQ.
      */
-    public get isMainline(): boolean {
+    public get isMainline() {
         return !this.rrt && !this.rrq;
     }
 
@@ -224,7 +230,7 @@ export class RouteDescription {
      * in the constructor, this value will be null.
      * @member {boolean}
      */
-    public get isDecrease(): boolean {
+    public get isDecrease() {
         return this._isDecrease;
     }
 
@@ -242,7 +248,7 @@ export class RouteDescription {
      * Value will be null when not applicable.
      * @member {number}
      */
-    public get mainlineConnectionMP(): number {
+    public get mainlineConnectionMP(): number | null {
         if (this.rrq && /^\d+$/.test(this.rrq)) {
             return parseInt(this.rrq, 10) / 100;
         } else {
@@ -255,7 +261,7 @@ export class RouteDescription {
      * @returns {boolean}
      */
     public get isLocalColector(): boolean {
-        return this.rrt && /((LX)|(F[DI]))/.test(this.rrt);
+        return !!this.rrt && /((LX)|(F[DI]))/.test(this.rrt);
     }
 
     /**
@@ -263,14 +269,14 @@ export class RouteDescription {
      * @returns {boolean}
      */
     public get isRamp(): boolean {
-        return this.rrt && /[PQRS][1-9]/.test(this.rrt);
+        return !!this.rrt && /[PQRS][1-9]/.test(this.rrt);
     }
 
     /**
      * Detailed description of the RRQ.
      * @member {string}
      */
-    public get rrqDescription(): string {
+    public get rrqDescription(): string | null {
         if (!this.rrq) {
             return null;
         } else if (rrqs.hasOwnProperty(this.rrq)) {

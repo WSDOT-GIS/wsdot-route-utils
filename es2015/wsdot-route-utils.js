@@ -130,7 +130,9 @@ export function getRouteParts(routeId, throwErrorOnMatchFail = false, canInclude
     else if (throwErrorOnMatchFail) {
         throw new Error(`${routeId} is not a valid WA state route identifier.`);
     }
-    return null;
+    else {
+        return null;
+    }
 }
 /**
  * Provides a description of a route.
@@ -140,18 +142,23 @@ export class RouteDescription {
     /**
      * Creates new instance.
      * @param {string} routeId - route ID
-     * @param {boolean} canIncludeDirection - Indicates if "d" suffix is allowed in ID to show direction.
+     * @param {boolean} [canIncludeDirection=false] - Indicates if "d" suffix is allowed in ID to show direction.
      */
     constructor(routeId, canIncludeDirection = false) {
         this._isDecrease = null;
         this._shield = undefined;
+        let routeParts = getRouteParts(routeId, true, canIncludeDirection);
         if (canIncludeDirection) {
             let d;
-            [this._sr, this._rrt, this._rrq, d] = getRouteParts(routeId, true, canIncludeDirection);
-            this._isDecrease = d === "d" ? true : false;
+            if (routeParts !== null) {
+                [this._sr, this._rrt, this._rrq, d] = routeParts;
+                this._isDecrease = d === "d";
+            }
         }
         else {
-            [this._sr, this._rrt, this._rrq] = getRouteParts(routeId, true, canIncludeDirection);
+            if (routeParts != null) {
+                [this._sr, this._rrt, this._rrq] = routeParts;
+            }
         }
     }
     /**
@@ -230,14 +237,14 @@ export class RouteDescription {
      * @returns {boolean}
      */
     get isLocalColector() {
-        return this.rrt && /((LX)|(F[DI]))/.test(this.rrt);
+        return !!this.rrt && /((LX)|(F[DI]))/.test(this.rrt);
     }
     /**
      * Indicates if the route is a ramp.
      * @returns {boolean}
      */
     get isRamp() {
-        return this.rrt && /[PQRS][1-9]/.test(this.rrt);
+        return !!this.rrt && /[PQRS][1-9]/.test(this.rrt);
     }
     /**
      * Detailed description of the RRQ.

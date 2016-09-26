@@ -224,7 +224,7 @@ const shields = new Map<number, Symbol>([
  * are used by this function.
  * @returns {string}
  */
-export function getShieldType(routeId: string): ShieldType {
+export function getShieldType(routeId: string): ShieldType | null {
     const re = /^\d{1,3}/;
     let match = routeId.match(re);
     if (!match) {

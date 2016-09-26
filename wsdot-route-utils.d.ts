@@ -40,7 +40,7 @@ export declare const relaxedWithDirRegexp: RegExp;
  * (as would be the case with a mainline).
  * Will be null if the routeId is not in the expected format and if throwErrorOnMatchFail is false.
  */
-export declare function getRouteParts(routeId: string, throwErrorOnMatchFail?: boolean, canIncludeDirection?: boolean): string[];
+export declare function getRouteParts(routeId: string, throwErrorOnMatchFail?: boolean, canIncludeDirection?: boolean): (string | null)[] | null;
 /**
  * Provides a description of a route.
  * @class module:wsdot-route-utils.RouteDescription
@@ -54,28 +54,28 @@ export declare class RouteDescription {
     /**
      * Creates new instance.
      * @param {string} routeId - route ID
-     * @param {boolean} canIncludeDirection - Indicates if "d" suffix is allowed in ID to show direction.
+     * @param {boolean} [canIncludeDirection=false] - Indicates if "d" suffix is allowed in ID to show direction.
      */
     constructor(routeId: string, canIncludeDirection?: boolean);
     /**
      * Gets the type of shield of a WA state route: "IS", "US", or "SR"
      */
-    readonly shield: ShieldType;
+    readonly shield: ShieldType | null;
     /**
      * Mainline component of route ID.
      * @member {string}
      */
-    readonly sr: string;
+    readonly sr: string | null;
     /**
      * Related Route Type (RRT) component.
      * @member {string}
      */
-    readonly rrt: string;
+    readonly rrt: string | null;
     /**
      * Related Route Qualifier (RRQ).
      * @member {string}
      */
-    readonly rrq: string;
+    readonly rrq: string | null;
     /**
      * Indicates if this is a mainline route ID.
      * I.e., no RRT or RRQ.
@@ -87,7 +87,7 @@ export declare class RouteDescription {
      * in the constructor, this value will be null.
      * @member {boolean}
      */
-    readonly isDecrease: boolean;
+    readonly isDecrease: boolean | null;
     /**
      * More detailed description of the RRT.
      * @member {string}
@@ -98,7 +98,7 @@ export declare class RouteDescription {
      * Value will be null when not applicable.
      * @member {number}
      */
-    readonly mainlineConnectionMP: number;
+    readonly mainlineConnectionMP: number | null;
     /**
      * Indicates if the route is a "local collector" type.
      * @returns {boolean}
@@ -113,7 +113,7 @@ export declare class RouteDescription {
      * Detailed description of the RRQ.
      * @member {string}
      */
-    readonly rrqDescription: string;
+    readonly rrqDescription: string | null;
     /**
      * Returns the route as a string.
      * @returns {string}

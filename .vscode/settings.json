@@ -1,11 +1,10 @@
 // Place your settings in this file to overwrite default and user settings.
 {
     "files.exclude": {
-        "**/*.{js,d.ts}": { "when": "$(basename).ts" },
-        "route-shields.js": true,
-        "wsdot-route-utils.js": true,
-        "spec/**/*Spec.js": true,
-        "es2015": true,
+        // "**/*.{js,d.ts}": { "when": "$(basename).ts" },
+        // "{route-shields,wsdot-route-utils}.js": true,
+        // "spec/**/*Spec.js": true,
+        // "es2015": true,
         "**/.git": true,
         "**/.svn": true,
         "**/.hg": true,

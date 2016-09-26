@@ -213,8 +213,9 @@
             });
         } else if (throwErrorOnMatchFail) {
             throw new Error(routeId + " is not a valid WA state route identifier.");
+        } else {
+            return null;
         }
-        return null;
     }
     /**
      * Provides a description of a route.
@@ -225,7 +226,7 @@
         /**
          * Creates new instance.
          * @param {string} routeId - route ID
-         * @param {boolean} canIncludeDirection - Indicates if "d" suffix is allowed in ID to show direction.
+         * @param {boolean} [canIncludeDirection=false] - Indicates if "d" suffix is allowed in ID to show direction.
          */
         function RouteDescription(routeId) {
             var canIncludeDirection = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
@@ -234,27 +235,27 @@
 
             this._isDecrease = null;
             this._shield = undefined;
+            var routeParts = getRouteParts(routeId, true, canIncludeDirection);
             if (canIncludeDirection) {
                 var d = void 0;
+                if (routeParts !== null) {
+                    var _routeParts = _slicedToArray(routeParts, 4);
 
-                var _getRouteParts = getRouteParts(routeId, true, canIncludeDirection);
+                    this._sr = _routeParts[0];
+                    this._rrt = _routeParts[1];
+                    this._rrq = _routeParts[2];
+                    d = _routeParts[3];
 
-                var _getRouteParts2 = _slicedToArray(_getRouteParts, 4);
-
-                this._sr = _getRouteParts2[0];
-                this._rrt = _getRouteParts2[1];
-                this._rrq = _getRouteParts2[2];
-                d = _getRouteParts2[3];
-
-                this._isDecrease = d === "d" ? true : false;
+                    this._isDecrease = d === "d";
+                }
             } else {
-                var _getRouteParts3 = getRouteParts(routeId, true, canIncludeDirection);
+                if (routeParts != null) {
+                    var _routeParts2 = _slicedToArray(routeParts, 3);
 
-                var _getRouteParts4 = _slicedToArray(_getRouteParts3, 3);
-
-                this._sr = _getRouteParts4[0];
-                this._rrt = _getRouteParts4[1];
-                this._rrq = _getRouteParts4[2];
+                    this._sr = _routeParts2[0];
+                    this._rrt = _routeParts2[1];
+                    this._rrq = _routeParts2[2];
+                }
             }
         }
         /**
@@ -369,7 +370,7 @@
         }, {
             key: "isLocalColector",
             get: function get() {
-                return this.rrt && /((LX)|(F[DI]))/.test(this.rrt);
+                return !!this.rrt && /((LX)|(F[DI]))/.test(this.rrt);
             }
             /**
              * Indicates if the route is a ramp.
@@ -379,7 +380,7 @@
         }, {
             key: "isRamp",
             get: function get() {
-                return this.rrt && /[PQRS][1-9]/.test(this.rrt);
+                return !!this.rrt && /[PQRS][1-9]/.test(this.rrt);
             }
             /**
              * Detailed description of the RRQ.

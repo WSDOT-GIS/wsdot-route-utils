@@ -29,6 +29,22 @@ module.exports = function (grunt) {
       postTS: ['**/.baseDir.**', '**/spec/*.d.ts'], // grunt-ts adds unneeded junk file .baseDir.*.
       postBabel: ['es2015/**/*.d.ts', 'es2015/spec/']
     },
+    jasmine: {
+      default: {
+        src: ['route-shields.js', 'wsdot-route-utils.js'],
+        options: {
+          specs: ['spec/*Spec.js'],
+          polyfills: ['node_modules/babel-polyfill/dist/polyfill.js']
+        }
+      }
+    },
+    jasmine_nodejs: {
+      default: {
+        specs: [
+          'spec/**'
+        ]
+      }
+    },
     ts: {
       default: {
         tsconfig: true
@@ -47,4 +63,5 @@ module.exports = function (grunt) {
   })
 
   grunt.registerTask('default', ['clean:prebuild', 'ts', 'clean:postTS', 'babel', 'copy', 'clean:postBabel', 'typedoc'])
+  grunt.registerTask('test', ['jasmine', 'jasmine_nodejs'])
 }

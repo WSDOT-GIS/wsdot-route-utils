@@ -218,6 +218,7 @@ const shields = new Map<number, Symbol>([
 ]);
 
 /**
+ * Gets the shield type associated with the given route.
  * @function module:route-shields.getShieldType
  * @param {string} routeId - route id.
  * Only up to the first three characters (i.e., digits)

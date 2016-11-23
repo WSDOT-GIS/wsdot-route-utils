@@ -3,9 +3,8 @@
  * @module wsdot-route-utils
  */
 
-import { getShieldType, ShieldType } from "./route-shields";
-
-/*
+/**
+ * need a doc comment here so typedoc will registerm module comment.
 ==RRTs (Related Roadway Type)==
 AR Alternate Route
 CD Collector Distributor (Dec)
@@ -32,6 +31,7 @@ SU Extension of S ramp
 FS Ferry Ship (Boat)
 FT Ferry Terminal
 */
+import { getShieldType, ShieldType } from "./route-shields";
 
 /**
  * Appends text to the end of (a copy of) a regular expression.
@@ -129,7 +129,7 @@ let rrqs: any = {
  * (as would be the case with a mainline).
  * Will be null if the routeId is not in the expected format and if throwErrorOnMatchFail is false.
  */
-export function getRouteParts(routeId: string, throwErrorOnMatchFail: boolean = false, canIncludeDirection: boolean = false) {
+export function getRouteParts(routeId: string, throwErrorOnMatchFail: boolean = false, canIncludeDirection: boolean = false): Array<string | null> | null {
     if (!(routeId && typeof routeId === "string")) {
         throw new TypeError("Input must be a string.");
     }

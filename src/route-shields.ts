@@ -4,16 +4,27 @@
  */
 
 /**
- * "US", "SR", "IS"
- * @typedef {string} RouteType
+ * Route Type: "US", "SR", "IS"
  */
 export type ShieldType = "US" | "SR" | "IS";
 
 // Create a symbol for each route shield type.
+/**
+ * @private
+ */
 const US_SYMBOL = Symbol("US");
+/**
+ * @private
+ */
 const IS_SYMBOL = Symbol("IS");
+/**
+ * @private
+ */
 const SR_SYMBOL = Symbol("SR");
 
+/**
+ * @private
+ */
 const shieldTypes = new Map<Symbol, ShieldType>([
     [US_SYMBOL, "US"],
     [IS_SYMBOL, "IS"],
@@ -22,9 +33,7 @@ const shieldTypes = new Map<Symbol, ShieldType>([
 
 /**
  * A Map that will provide a shield type for a given state route number.
- * @type {Map.<number, Symbol>} module:route-shields
  * @private
- * @readonly
  */
 const shields = new Map<number, Symbol>([
     [2, US_SYMBOL],
@@ -219,11 +228,9 @@ const shields = new Map<number, Symbol>([
 
 /**
  * Gets the shield type associated with the given route.
- * @function module:route-shields.getShieldType
- * @param {string} routeId - route id.
+ * @param routeId - route id.
  * Only up to the first three characters (i.e., digits)
  * are used by this function.
- * @returns {string}
  */
 export function getShieldType(routeId: string): ShieldType | null {
     const re = /^\d{1,3}/;

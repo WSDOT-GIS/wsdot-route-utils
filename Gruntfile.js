@@ -55,16 +55,17 @@ module.exports = function (grunt) {
         options: {
           out: './docs',
           name: 'WSDOT Route Utilities',
-          excludePrivate: false
+          excludePrivate: true
         },
         src: ['./src/*.ts']
       }
     },
     concurrent: {
+      build: [['clean:prebuild', 'ts', 'clean:postTS', 'babel', 'copy', 'clean:postBabel'], 'typedoc'],
       test: ['jasmine', 'jasmine_nodejs']
     }
   })
 
-  grunt.registerTask('default', ['clean:prebuild', 'ts', 'clean:postTS', 'babel', 'copy', 'clean:postBabel', 'typedoc'])
+  grunt.registerTask('default', ['concurrent:build'])
   grunt.registerTask('test', ['concurrent:test'])
 }

@@ -7,7 +7,7 @@
   "typings": "wsdot-route-utils.d.ts",
   "scripts": {
     "prepublish": "grunt",
-    "test": "jasmine && karma start --single-run --browsers PhantomJS,Firefox"
+    "test": "grunt test"
   },
   "files": [
     "wsdot-route-utils.js",

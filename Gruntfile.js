@@ -59,9 +59,12 @@ module.exports = function (grunt) {
         },
         src: ['./src/*.ts']
       }
+    },
+    concurrent: {
+      test: ['jasmine', 'jasmine_nodejs']
     }
   })
 
   grunt.registerTask('default', ['clean:prebuild', 'ts', 'clean:postTS', 'babel', 'copy', 'clean:postBabel', 'typedoc'])
-  grunt.registerTask('test', ['jasmine', 'jasmine_nodejs'])
+  grunt.registerTask('test', ['concurrent:test'])
 }

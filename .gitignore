@@ -4,7 +4,6 @@ es2015/
 route-shields.js
 wsdot-route-utils.js
 **/*.d.ts
-docs/
 iisexpress.json
 
 typings

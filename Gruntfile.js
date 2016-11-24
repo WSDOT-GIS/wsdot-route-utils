@@ -7,7 +7,6 @@ module.exports = function (grunt) {
           expand: true,
           cwd: 'es2015',
           src: '**/*.js',
-          // dest: 'dist',
           ext: '.js'
         }]
       }
@@ -25,6 +24,7 @@ module.exports = function (grunt) {
       }
     },
     clean: {
+      docs: ['docs'],
       prebuild: ['es2015', '{route-shields,wsdot-route-utils}.{js,d.ts}', 'spec/*.js', 'docs'],
       postTS: ['**/.baseDir.**', '**/spec/*.d.ts'], // grunt-ts adds unneeded junk file .baseDir.*.
       postBabel: ['es2015/**/*.d.ts', 'es2015/spec/']
@@ -55,6 +55,7 @@ module.exports = function (grunt) {
         options: {
           out: './docs',
           name: 'WSDOT Route Utilities',
+          theme: 'minimal',
           excludePrivate: true
         },
         src: ['./src/*.ts']
@@ -67,5 +68,6 @@ module.exports = function (grunt) {
   })
 
   grunt.registerTask('default', ['concurrent:build'])
+  grunt.registerTask('makedocs', ['clean:docs', 'typedoc'])
   grunt.registerTask('test', ['concurrent:test'])
 }

@@ -4,7 +4,7 @@
  */
 
 /**
- * need a doc comment here so typedoc will registerm module comment.
+ * need a doc comment here so typedoc will register module comment.
 ==RRTs (Related Roadway Type)==
 AR Alternate Route
 CD Collector Distributor (Dec)
@@ -35,9 +35,9 @@ import { getShieldType, ShieldType } from "./route-shields";
 
 /**
  * Appends text to the end of (a copy of) a regular expression.
- * @param {RegExp} inputRe - A regular expression ending with "$".
- * @param {string} escapedText - Text to append to the end of the input RegExp.
- * @returns {RegExp} - Returns a modified copy of the input RegExp.
+ * @param inputRe - A regular expression ending with "$".
+ * @param escapedText - Text to append to the end of the input RegExp.
+ * @returns - Returns a modified copy of the input RegExp.
  * @private
  */
 function appendToRegex(inputRe: RegExp, escapedText: string): RegExp {
@@ -46,8 +46,6 @@ function appendToRegex(inputRe: RegExp, escapedText: string): RegExp {
 
 /**
  * Matches state route format, with captures for SR, RRT, and RRQ. First element in array will be entire match.
- * @type {Regexp}
- * @const
  */
 export const srRegex = /^(\d{3})(?:((?:AR)|(?:C[DI])|(?:C[O])|(?:F[DI])|(?:LX)|(?:[PQRS][\dU])|(?:RL)|(?:SP)|(?:TB)|(?:TR)|(?:PR)|(?:F[ST])|(?:ML))([A-Z0-9]{0,6}))?$/;
 
@@ -56,26 +54,24 @@ const dirReSuffix = "(d)?";
 
 /**
  * Matches state route + optional direction format, with captures for SR, RRT, RRQ, and direction. First element in array will be entire match.
- * @type {Regexp}
- * @const
  */
 export const srdRegex = appendToRegex(srRegex, dirReSuffix);
 
 /**
  * A more relaxed Regexp than srRegex, which doesn't check for specific RRTs, only that they are two characters long if present.
- * @type {Regexp}
- * @const
  */
 export const relaxedRegex = /^(\d{3})(?:([A-Z1-9]{2})([A-Z0-9]{0,6}))?$/;
 
 /**
  * Like {@link relaxedRegex}, but allows optional "d" suffix.
- * @type {Regexp}
  * @see {@link relaxedRegex}
  */
 export const relaxedWithDirRegexp = appendToRegex(relaxedRegex, dirReSuffix);
 
 // Define RRTs
+/**
+ * @private
+ */
 let rrts: any = {
     AR: "Alternate Route",
     CO: "Couplet",
@@ -98,6 +94,9 @@ let rrts: any = {
 };
 
 // Add ramp RRTs.
+/**
+ * @private
+ */
 let rampTypes: any = {
     P: ["Off", "Inc"],
     Q: ["On", "Inc"],
@@ -112,6 +111,9 @@ let rampTypes: any = {
     }
 });
 
+/**
+ * @private
+ */
 let rrqs: any = {
     "ABERDN": "Aberdeen"
 };
@@ -121,10 +123,10 @@ let rrqs: any = {
  * If the input route ID is not in the expected format, one of two things
  * will happen according to the value of the "throwErrorOnMatchFail" parameter.
  * If set to false, null will be returned. If set to true, an Error will be thrown.
- * @param {string} routeId - A state route identifier.
- * @param {boolean} [throwErrorOnMatchFail=false] - Determines if route IDs that are
+ * @param routeId - A state route identifier.
+ * @param [throwErrorOnMatchFail=false] - Determines if route IDs that are
  * not in the expected format will fail or simply return null.
- * @returns {string[]} An array of three elements: SR, RRT, and RRQ.
+ * @returns An array of three elements: SR, RRT, and RRQ.
  * The elements at position 1 and 2 may be null if a route has no RRT or RRQ
  * (as would be the case with a mainline).
  * Will be null if the routeId is not in the expected format and if throwErrorOnMatchFail is false.
@@ -148,7 +150,6 @@ export function getRouteParts(routeId: string, throwErrorOnMatchFail: boolean = 
 
 /**
  * Provides a description of a route.
- * @class module:wsdot-route-utils.RouteDescription
  */
 export class RouteDescription {
     private _sr: string | null;
@@ -193,7 +194,6 @@ export class RouteDescription {
 
     /**
      * Mainline component of route ID.
-     * @member {string}
      */
     public get sr(): string | null {
         return this._sr;
@@ -201,7 +201,6 @@ export class RouteDescription {
 
     /**
      * Related Route Type (RRT) component.
-     * @member {string}
      */
     public get rrt(): string | null {
         return this._rrt;
@@ -209,7 +208,6 @@ export class RouteDescription {
 
     /**
      * Related Route Qualifier (RRQ).
-     * @member {string}
      */
     public get rrq(): string | null {
         return this._rrq;
@@ -228,7 +226,6 @@ export class RouteDescription {
      * Indicates decreasing direction was specified.
      * If the "canIncludeDirection" option was set to false
      * in the constructor, this value will be null.
-     * @member {boolean}
      */
     public get isDecrease() {
         return this._isDecrease;
@@ -237,7 +234,6 @@ export class RouteDescription {
 
     /**
      * More detailed description of the RRT.
-     * @member {string}
      */
     public get rrtDescription(): string {
         return this.rrt ? rrts[this.rrt] : null;
@@ -246,7 +242,6 @@ export class RouteDescription {
     /**
      * If applicable, milepost where this route either leaves or joins the mainline.
      * Value will be null when not applicable.
-     * @member {number}
      */
     public get mainlineConnectionMP(): number | null {
         if (this.rrq && /^\d+$/.test(this.rrq)) {
@@ -258,7 +253,6 @@ export class RouteDescription {
 
     /**
      * Indicates if the route is a "local collector" type.
-     * @returns {boolean}
      */
     public get isLocalColector(): boolean {
         return !!this.rrt && /((LX)|(F[DI]))/.test(this.rrt);
@@ -266,7 +260,6 @@ export class RouteDescription {
 
     /**
      * Indicates if the route is a ramp.
-     * @returns {boolean}
      */
     public get isRamp(): boolean {
         return !!this.rrt && /[PQRS][1-9]/.test(this.rrt);
@@ -274,7 +267,6 @@ export class RouteDescription {
 
     /**
      * Detailed description of the RRQ.
-     * @member {string}
      */
     public get rrqDescription(): string | null {
         if (!this.rrq) {
@@ -290,7 +282,6 @@ export class RouteDescription {
 
     /**
      * Returns the route as a string.
-     * @returns {string}
      */
     public toString() {
         return `${this.sr}${this.rrt || ""}${this.rrq || ""}${this.isDecrease === true ? "d" : ""}`;

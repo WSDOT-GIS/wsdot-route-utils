@@ -55,7 +55,7 @@ module.exports = function (grunt) {
         options: {
           out: './docs',
           name: 'WSDOT Route Utilities',
-          theme: 'minimal',
+          // theme: 'minimal',
           excludePrivate: true
         },
         src: ['./src/*.ts']

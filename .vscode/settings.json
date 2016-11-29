@@ -11,5 +11,9 @@
         "**/.svn": true,
         "**/.hg": true,
         "**/.DS_Store": true
+    },
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "docs/**": true
     }
 }

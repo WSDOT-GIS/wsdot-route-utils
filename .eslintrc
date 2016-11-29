@@ -6,6 +6,8 @@
         "promise"
     ],
     "ignore": [
-        "spec/*.Spec.js"
+        "spec/*.Spec.js",
+        "doc/**",
+        "node_modules/**"
     ]
 }

@@ -5,6 +5,10 @@
     "Gruntfile.js",
     "karma.config.js"
   ],
+  "critics": {
+    "lint": {"engine": "tslint"},
+    "wc": {"limit": 300}
+  },
   "test": [
     "**/spec/**"
   ]

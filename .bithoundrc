@@ -1,6 +1,9 @@
 {
   "ignore": [
-    "docs/**"
+    "**/node_modules/**",
+    "docs/**",
+    "Gruntfile.js",
+    "karma.config.js"
   ],
   "test": [
     "**/spec/**"

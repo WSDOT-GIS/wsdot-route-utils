@@ -3,7 +3,7 @@
     "**/node_modules/**",
     "docs/**",
     "Gruntfile.js",
-    "karma.config.js"
+    "karma.conf.js"
   ],
   "critics": {
     "lint": {"engine": "none"},

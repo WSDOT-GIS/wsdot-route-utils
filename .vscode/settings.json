@@ -5,7 +5,7 @@
         "{route-shields,wsdot-route-utils}.js": true,
         "spec/**/*Spec.js": true,
         "es2015": true,
-        "docs": true,
+        "docs": false,
         ".tscache": true,
         "**/.git": true,
         "**/.svn": true,

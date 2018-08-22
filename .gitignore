@@ -1,3 +1,5 @@
+dist
+src/**/*.js
 .tscache/
 spec/*Spec.js
 es2015/

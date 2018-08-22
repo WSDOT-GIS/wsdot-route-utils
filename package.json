@@ -1,20 +1,18 @@
 {
   "name": "wsdot-route-utils",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "description": "Utilites for WA state route IDs",
-  "main": "wsdot-route-utils.js",
-  "esnext:main": "es2015/wsdot-route-utils.js",
-  "typings": "wsdot-route-utils.d.ts",
+  "main": "dist/commonjs/index.js",
+  "esnext:main": "dist/es2015/index.js",
+  "typings": "dist/es2015/index.d.ts",
   "scripts": {
-    "prepublish": "grunt",
-    "test": "grunt test"
+    "prepare": "tsc --outDir dist/commonjs --module commonjs && tsc --outDir dist/es2015 --module es2015",
+    "clean": "git clean -dfx -e node_modules",
+    "lint": "tslint -p . --fix",
+    "test": "jasmine"
   },
   "files": [
-    "wsdot-route-utils.js",
-    "wsdot-route-utils.d.ts",
-    "route-shields.js",
-    "route-shields.d.ts",
-    "es2015"
+    "dist"
   ],
   "esnext:files": [
     "es2015"
@@ -25,32 +23,18 @@
     "Washington",
     "route"
   ],
-  "engines": {
-    "node": ">= 4",
-    "npm": ">= 3"
-  },
   "author": "WSDOT",
   "license": "Unlicense",
   "dependencies": {},
   "devDependencies": {
-    "@types/jasmine": "^2.5.38",
-    "babel-cli": "^6.18.0",
-    "babel-polyfill": "^6.16.0",
-    "babel-preset-es2015": "^6.18.0",
-    "grunt": "^1.0.1",
-    "grunt-babel": "^6.0.0",
-    "grunt-concurrent": "^2.3.1",
-    "grunt-contrib-clean": "^1.0.0",
-    "grunt-contrib-copy": "^1.0.0",
-    "grunt-contrib-jasmine": "^1.0.3",
-    "grunt-jasmine-nodejs": "^1.5.4",
-    "grunt-ts": "^6.0.0-beta.3",
-    "grunt-typedoc": "^0.2.4",
-    "jasmine": "^2.5.2",
-    "load-grunt-tasks": "^3.5.2",
-    "tslint": "^4.0.2",
-    "typedoc": "^0.5.1",
-    "typescript": "^2.0.10"
+    "@types/jasmine": "^2.8.8",
+    "jasmine": "^3.2.0",
+    "prettier": "^1.14.2",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.15.0",
+    "tslint-plugin-prettier": "^1.3.0",
+    "typedoc": "^0.12.0",
+    "typescript": "^3.0.1"
   },
   "repository": {
     "type": "git",

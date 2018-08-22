@@ -1,12 +1,6 @@
 // Place your settings in this file to overwrite default and user settings.
 {
     "files.exclude": {
-        "**/*.{js,d.ts}": { "when": "$(basename).ts" },
-        "{route-shields,wsdot-route-utils}.js": true,
-        "spec/**/*Spec.js": true,
-        "es2015": true,
-        "docs": false,
-        ".tscache": true,
         "**/.git": true,
         "**/.svn": true,
         "**/.hg": true,
@@ -15,5 +9,7 @@
     "files.watcherExclude": {
         "**/.git/objects/**": true,
         "docs/**": true
-    }
+    },
+    "tslint.autoFixOnSave": true,
+    "prettier.tslintIntegration": true
 }

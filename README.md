@@ -10,18 +10,12 @@ Utilities for working with Washington state route identifiers.
 [![npm](https://img.shields.io/npm/dm/wsdot-route-utils.svg?maxAge=2592000)](https://www.npmjs.com/package/wsdot-route-utils)
 [![node](https://img.shields.io/node/v/wsdot-route-utils.svg?maxAge=2592000)](https://www.npmjs.com/package/wsdot-route-utils)
 
-[![Bower](https://img.shields.io/bower/v/wsdot-route-utils.svg?maxAge=2592000)](https://github.com/WSDOT-GIS/wsdot-route-utils/)
-
-
 Get from NPM
 ------------
 
-        npm install --save wsdot-route-utils
-
-Get from Bower
---------------
-
-        bower install --save wsdot-route-utils
+```sh
+npm install --save wsdot-route-utils
+```
 
 Sample
 ------

@@ -27,14 +27,14 @@
   "license": "Unlicense",
   "dependencies": {},
   "devDependencies": {
-    "@types/jasmine": "^3.3.9",
-    "jasmine": "^3.3.1",
-    "prettier": "^1.16.4",
-    "tslint": "^5.12.1",
+    "@types/jasmine": "^3.3.13",
+    "jasmine": "^3.4.0",
+    "prettier": "^1.17.1",
+    "tslint": "^5.17.0",
     "tslint-config-prettier": "^1.18.0",
     "tslint-plugin-prettier": "^2.0.1",
     "typedoc": "^0.14.2",
-    "typescript": "^3.3.3"
+    "typescript": "^3.5.1"
   },
   "repository": {
     "type": "git",

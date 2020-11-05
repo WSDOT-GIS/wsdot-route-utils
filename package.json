@@ -1,6 +1,6 @@
 {
   "name": "wsdot-route-utils",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Utilites for WA state route IDs",
   "main": "dist/commonjs/index.js",
   "esnext:main": "dist/es2015/index.js",
@@ -27,14 +27,14 @@
   "license": "Unlicense",
   "dependencies": {},
   "devDependencies": {
-    "@types/jasmine": "^3.3.13",
-    "jasmine": "^3.4.0",
-    "prettier": "^1.17.1",
-    "tslint": "^5.17.0",
+    "@types/jasmine": "^3.6.1",
+    "jasmine": "^3.6.3",
+    "prettier": "^2.1.2",
+    "tslint": "^5.20.1",
     "tslint-config-prettier": "^1.18.0",
-    "tslint-plugin-prettier": "^2.0.1",
-    "typedoc": "^0.14.2",
-    "typescript": "^3.5.1"
+    "tslint-plugin-prettier": "^2.3.0",
+    "typedoc": "^0.19.2",
+    "typescript": "^4.0.5"
   },
   "repository": {
     "type": "git",

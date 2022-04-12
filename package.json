@@ -1,7 +1,7 @@
 {
   "name": "wsdot-route-utils",
   "version": "2.0.2",
-  "description": "Utilites for WA state route IDs",
+  "description": "Utilities for WA state route IDs",
   "main": "dist/commonjs/index.js",
   "esnext:main": "dist/es2015/index.js",
   "typings": "dist/es2015/index.d.ts",

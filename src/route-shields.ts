@@ -3,7 +3,7 @@
  * @module route-shields
  */
 
-import FormatError from "./FormatError";
+import FormatError from "./FormatError.js";
 
 /**
  * Route Type: "US", "SR", "IS"

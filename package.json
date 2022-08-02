@@ -1,22 +1,19 @@
 {
   "name": "wsdot-route-utils",
-  "version": "2.0.2",
+  "version": "3.0.0",
   "description": "Utilities for WA state route IDs",
-  "main": "dist/commonjs/index.js",
-  "esnext:main": "dist/es2015/index.js",
-  "typings": "dist/es2015/index.d.ts",
-  "scripts": {
-    "prepare": "tsc --outDir dist/commonjs --module commonjs && tsc --outDir dist/es2015 --module es2015",
-    "clean": "git clean -dfx -e node_modules",
-    "lint": "tslint -p . --fix",
-    "test": "jasmine"
-  },
+  "type": "module",
+  "main": "dist/index.js",
   "files": [
     "dist"
   ],
-  "esnext:files": [
-    "es2015"
-  ],
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "prepare": "tsc",
+    "clean": "git clean -dfx -e node_modules",
+    "lint": "tslint -p . --fix",
+    "test": "jest"
+  },
   "keywords": [
     "WSDOT",
     "WA",
@@ -26,9 +23,10 @@
   "author": "WSDOT",
   "license": "Unlicense",
   "devDependencies": {
-    "@types/jasmine": "^4.0.3",
-    "jasmine": "^4.3.0",
+    "@types/jest": "^28.1.6",
+    "@types/node": "^18.6.3",
     "prettier": "^2.7.1",
+    "ts-jest": "^28.0.7",
     "tslint": "^5.20.1",
     "tslint-config-prettier": "^1.18.0",
     "tslint-plugin-prettier": "^2.3.0",

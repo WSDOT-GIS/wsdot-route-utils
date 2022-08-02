@@ -31,8 +31,8 @@
  * FS Ferry Ship (Boat)
  * FT Ferry Terminal
  */
-import FormatError from "./FormatError";
-import { getShieldType, ShieldType } from "./route-shields";
+import FormatError from "./FormatError.js";
+import { getShieldType, ShieldType } from "./route-shields.js";
 
 /**
  * Appends text to the end of (a copy of) a regular expression.

@@ -1,5 +1,5 @@
 // import { getRouteParts, RouteDescription } from "../wsdot-route-utils";
-const { getRouteParts, RouteDescription } = require("../dist/commonjs/index");
+import { getRouteParts, RouteDescription } from "./wsdot-route-utils.js";
 
 describe("RouteDescription", () => {
   it("won't parse invalidly formatted routes", () => {

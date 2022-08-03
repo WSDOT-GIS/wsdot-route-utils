@@ -11,8 +11,8 @@ export type IsBackInput = boolean | BackIndicator | Lowercase<BackIndicator>;
  * @member {boolean} IsBack
  */
 export class Milepost extends Object {
-    protected _isBack: boolean = false;
-    private _mp: number = NaN;
+    protected _isBack = false;
+    private _mp = NaN;
 
     private static readonly _mpRe = /^(?<mpX1000>\d+)(?<ab>[AB])$/i;
 
@@ -94,7 +94,7 @@ export class WsdotRHRouteName {
         return this._routeId!;
     }
     public set routeId(v: RouteDescription | string) {
-        this._routeId = v instanceof RouteDescription ? v : new RouteDescription(v, true);
+        this._routeId = v instanceof RouteDescription ? v : new RouteDescription(v, false, "i", "d", "r");
     }
 
 

@@ -25,6 +25,9 @@ describe("RouteDescription", () => {
     const routeParts = getRouteParts(srid, true);
     if (routeParts !== null) {
       const [sr, rrt, rrq] = routeParts;
+      expect(sr).toEqual("101");
+      expect(rrt).toEqual("CO");
+      expect(rrq).toEqual("ABERDN");
       const desc = new RouteDescription(srid);
       expect(desc.sr).toEqual(sr);
       expect(desc.rrt).toEqual(rrt);
@@ -45,14 +48,14 @@ describe("RouteDescription", () => {
     const withDirId = "529SPEVERETd";
     const nonDirId = "005Q516479";
 
-    const withDirDesc = new RouteDescription(withDirId, true);
-    const nonDirDesc = new RouteDescription(nonDirId, false);
-    const incDesc = new RouteDescription(nonDirId, true);
+    const withDirDesc = new RouteDescription(withDirId, false, "d");
+    const nonDirDesc = new RouteDescription(nonDirId);
+    const incDesc = new RouteDescription(nonDirId, true, "d");
     expect(withDirDesc.isDecrease).toEqual(true);
     expect(nonDirDesc.isDecrease).toEqual(null);
     expect(incDesc.isDecrease).toEqual(false);
     expect(() => {
-      const desc = new RouteDescription(withDirId, false); // eslint-disable-line no-unused-vars
+      const desc = new RouteDescription(withDirId); // eslint-disable-line no-unused-vars
     }).toThrowError();
   });
 });

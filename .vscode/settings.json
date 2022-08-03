@@ -12,5 +12,10 @@
     },
     "tslint.autoFixOnSave": true,
     "prettier.tslintIntegration": true,
-    "typescript.tsdk": "node_modules\\typescript\\lib"
+    "typescript.tsdk": "node_modules\\typescript\\lib",
+    "yaml.schemas": {
+        "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/packages/cspell-types/cspell.schema.json": [
+            "cspell.config.yaml"
+        ]
+    }
 }

@@ -271,7 +271,7 @@ export function getShieldType(routeId: string | number): ShieldType | null {
  */
 export function getPrefix(
   routeId: string | number,
-  useWAForSR: boolean = false
+  useWAForSR = false
 ) {
   const shield = getShieldType(routeId);
   if (shield === null) {

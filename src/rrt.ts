@@ -108,7 +108,7 @@ export const rrts: { [key: string]: string | RampDescription } = {
     UC: "Under Construction"
 };
 
-function* enumerateObjectProperties(o: { [key: string]: string }) {
+function* enumerateRrtDictionaryProperties(rrts: { [key: string]: string }) {
     for (const rrt in rrts) {
         if (Object.prototype.hasOwnProperty.call(rrts, rrt)) {
             const description = rrts[rrt];
@@ -117,7 +117,7 @@ function* enumerateObjectProperties(o: { [key: string]: string }) {
     }
 }
 
-type RampDescription = `${"On" | "Off"} Ramp ${NonZeroDigits}, ${"Inc" | "Dec"}` | `${RampFirstChar} Ramp ${NonZeroDigits}`;
+export type RampDescription = `${"On" | "Off"} Ramp ${NonZeroDigits}, ${"Inc" | "Dec"}` | `${RampFirstChar} Ramp ${NonZeroDigits}`;
 
 
 function* enumerateRampRrts() {
@@ -147,7 +147,7 @@ function* enumerateRampRrts() {
 }
 
 
-export const RelatedRouteTypes = new Array<RelatedRouteType>(...enumerateObjectProperties(rrts));
+export const RelatedRouteTypes = new Array<RelatedRouteType>(...enumerateRrtDictionaryProperties(rrts));
 
 for (const [rrt, desc] of enumerateRampRrts()) {
     if (desc) {

@@ -1,4 +1,5 @@
 import { rrtMapping } from "./rrt.js";
+import type { RouteIdParseOptions } from "./wsdot-route-utils.js";
 
 export type Suffix = "d" | "i" | "r";
 
@@ -21,17 +22,17 @@ function appendToRegex(inputRe: RegExp, escapedText: string): RegExp {
  * @param suffixes - Suffixes to add to the input {@link RegExp} to allow suffixes.
  * @returns 
  */
-export function appendSuffixesToRegex(inputRe: RegExp, suffixesAreOptional: boolean, ...suffixes: Suffix[]) {
-    if (!suffixes || suffixes.length < 1) {
+export function appendSuffixesToRegex(inputRe: RegExp, options: RouteIdParseOptions) {
+    if (!options.allowedSuffixes || options.allowedSuffixes.length < 1) {
         throw new TypeError("No suffixes were provided.");
     }
-    for (const suffix of suffixes) {
+    for (const suffix of options.allowedSuffixes) {
         if (suffix.length !== 1) {
             throw new RangeError(`All suffixes strings must only be one character. This value does not meet these requirements: ${suffix}`);
         }
     }
-    let escapedText = `(?<suffix>[${suffixes.join("")}])`;
-    if (suffixesAreOptional) {
+    let escapedText = `(?<suffix>[${options.allowedSuffixes.join("")}])`;
+    if (options.suffixesAreOptional) {
         escapedText += "?";
     }
     return appendToRegex(inputRe, escapedText)

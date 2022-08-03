@@ -12,7 +12,8 @@
     "prepare": "tsc",
     "clean": "git clean -dfx -e node_modules",
     "lint": "tslint -p . --fix",
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watch --bail=1 --onlyChanged"
   },
   "keywords": [
     "WSDOT",

@@ -11,17 +11,25 @@ describe("WSDOT Roads & Highways Route Name parsing", () => {
             encoding: "utf-8"
         })).split(/[\r\n]+/m);
         /** expected format for the route names. */
-        const expectedFormat = /^(\d{3}[0-9A-Z]{0,8})([idr])(\d+)[AB]$/;
+        const expectedFormat = WsdotRHRouteName.routeNameRe;
+        /** All of the names that aren't in the expected format. */
+        const unmatchable = new Set<string>();
         for (const routeNameString of routeList) {
             const match = routeNameString.match(expectedFormat);
             if (!match) {
-                console.warn(`Skipping test. ${routeNameString} did not match ${expectedFormat}`);
+                unmatchable.add(routeNameString);
                 continue;
             }
-            let routeName;
+            let routeName: WsdotRHRouteName | null = null;
             expect(() => {
                 routeName = new WsdotRHRouteName(routeNameString);
             }).not.toThrowError();
+            if (routeName === null) {
+                throw new TypeError("route name should not be null");
+            }
+        }
+        if (!!unmatchable && unmatchable.size > 0) {
+            console.warn(`Some of the input route names were skipped due to not matching the expected format.\n${[...unmatchable].join("\n")}`);
         }
 
     });

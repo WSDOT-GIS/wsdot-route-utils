@@ -11,5 +11,6 @@ words:
   - typedoc
   - WSDOT
 ignoreWords:
+  - CNLC
   - PQRS
 import: []

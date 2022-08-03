@@ -1,133 +1,112 @@
-import { RouteDescription } from "./index.js";
+/**
+ * This module is for use with the WSDOT LRS map service with Roads & Highways
+ * extension for parsing its route name string values.
+ * 
+ * @todo The following route names found in the Roads & Highways service
+ * do not currently match the regular expression and currently cannot be 
+ * parsed.
+ * 
+ * 
+ * * 002R1CN097Adi000000A
+ * * 005CNLC2RMP1i000000A
+ * * 005CNLC2RMP2i000000A
+ * * 005CNLC2RMP3i000000A
+ */
+
+import { RouteDescription, Milepost, createRouteRegex } from "./index.js";
 
 export type BackIndicator = "A" | "B";
 export type IsBackInput = boolean | BackIndicator | Lowercase<BackIndicator>;
 
 /**
- * Represents a WA state route milepost,
- * consisting of a numeric and "is back"
- * boolean value.
- * @member {number} mp
- * @member {boolean} IsBack
+ * Builds a {@link RegExp} that will match a route name.
+ * @param validRrts - 
+ * @see {@link createRouteRegex}
+ * @returns 
  */
-export class Milepost extends Object {
-    protected _isBack = false;
-    private _mp = NaN;
+export function buildRouteNameRegExp(validRrts?: string[]): RegExp {
+    // /^(?<routeIdAndDir>(?<routeId>[\da-z]+)(?<routeType>[idr]))(?<additionalInfo>\w+[idr])?(?<mpAndAB>(?<mpX1000>\d+)(?<ab>[AB]))$/i;
+    const routeIdRegex = createRouteRegex(validRrts);
 
-    private static readonly _mpRe = /^(?<mpX1000>\d+)(?<ab>[AB])$/i;
+    let routeIdPattern = routeIdRegex.source;
 
-    public get isBack(): boolean {
-        return this._isBack;
-    }
-    public set isBack(v: boolean | BackIndicator | Lowercase<BackIndicator>) {
-        if (typeof v === "boolean") {
-            this._isBack = v;
-        } else if (v.toUpperCase() === "B") {
-            this._isBack = true;
-        } else if (v.toUpperCase() === 'A') {
-            this._isBack = false;
-        } else {
-            const validValues = [true, false, "A", "B", "a", "b"];
-            throw new TypeError(`Input string is not valid: ${v}. Valid values are ${validValues.join(", ")}.`);
-        }
-        this._isBack = typeof v === "boolean" ? v : v.toUpperCase() === "B";
-    }
+    // Remove the "^" and "$" parts of the pattern,
+    // since it will be inserted into another regex.
+    routeIdPattern = routeIdPattern.replace(/[$^]/g, "");
 
+    const pattern = String.raw`^(?<routeIdAndDir>(?<routeId>${routeIdPattern})(?<routeType>[idr]))(?<additionalInfo>\w+[idr])?(?<mpAndAB>(?<mpX1000>\d+)(?<ab>[AB]))$`;
 
-    public get mp(): number {
-        return this._mp;
-    }
-    public set mp(v: number | string) {
-        if (typeof v === "string") {
-            this._mp = parseInt(v, 10) / 1_000;
-        } else {
-            this._mp = v;
-        }
-    }
-
-    public get mpAsChar(): BackIndicator {
-        return this.isBack ? "B" : "A";
-    }
-
-    override toString() {
-        return `${this.mp}${this.mpAsChar}`;
-    }
-
-
-    constructor(mpString: string)
-    constructor(mp: number, isBack: IsBackInput)
-    constructor(mpStringOrNumber: string | number, isBack: IsBackInput = false) {
-        super();
-        if (typeof mpStringOrNumber === "string") {
-            const match = mpStringOrNumber.match(Milepost._mpRe);
-            if (!(match && match.length >= 3 && match.groups)) {
-                throw new TypeError(`Input string "${mpStringOrNumber}" was not in expected format: ${Milepost._mpRe}.`);
-            }
-            this.mp = match.groups["mpX1000"];
-            this.isBack = match.groups["ab"] as BackIndicator | Lowercase<BackIndicator>;
-            // // Remove the first element, which is the complete match.
-            // match.slice(1)
-            //     .map((s, i) => {
-            //         if (i === 0) {
-            //             this.mp = s;
-            //         } else {
-            //             this.isBack = s as BackIndicator;
-            //         }
-            //     })
-        } else {
-            this.mp = mpStringOrNumber;
-            this.isBack = isBack;
-        }
-    }
+    return new RegExp(pattern);
 }
 
 /**
  * Route name used with WSDOT's implementation of ArcGIS Roads & Highways extension.
- * @property {RouteDescription} routeId - Route Identifier
- * @property {Milepost} mp
  */
 export class WsdotRHRouteName {
-    private static readonly routeNameRe = /^(?<routeIdAndDir>(?<routeId>[\da-z]+)(?<routeType>[idr]))(?<mpAndAB>(?<mpX1000>\d+)(?<ab>[AB]))$/i;
-
-    private _routeId: RouteDescription | undefined = undefined;
-    public get routeId(): RouteDescription {
-        return this._routeId!;
+    public static readonly routeNameRe = buildRouteNameRegExp();
+    private static parseRouteDescription(v: RouteDescription | string) {
+        return v instanceof RouteDescription ? v : RouteDescription.parseRoadsAndHighwaysRouteId(v, true);
     }
-    public set routeId(v: RouteDescription | string) {
-        this._routeId = v instanceof RouteDescription ? v : new RouteDescription(v, false, "i", "d", "r");
-    }
-
-
-    private _milepost: Milepost | undefined = undefined;
-    public get milepost(): Milepost {
-        return this._milepost!;
-    }
-    public set milepost(v: Milepost | string) {
-        this._milepost = v instanceof Milepost ? v : new Milepost(v);
-    }
-
-    constructor(routeName: string)
-    constructor(routeId: RouteDescription | string, mp: Milepost)
-    /** @private */
-    constructor(routeIdOrName: string | RouteDescription, mp?: Milepost) {
-        if ((routeIdOrName instanceof RouteDescription || typeof routeIdOrName === "string") && mp instanceof Milepost) {
-            this.routeId = routeIdOrName;
-            this.milepost = mp;
+    static parseRouteIdAndMilepost(routeIdOrName: string): [RouteDescription, Milepost] {
+        const match = routeIdOrName.match(WsdotRHRouteName.routeNameRe);
+        if (match && match.groups) {
+            const routeIdString = match.groups["routeIdAndDir"];
+            const milepostString = match.groups["mpAndAB"];
+            const routeId = WsdotRHRouteName.parseRouteDescription(routeIdString);
+            const milepost = new Milepost(milepostString);
+            return [routeId, milepost]
         }
-        else if (typeof routeIdOrName === "string") {
-            const match = routeIdOrName.match(WsdotRHRouteName.routeNameRe);
-            if (match && match.groups) {
-                this.routeId = match.groups["routeIdAndDir"];
-                this.milepost = match.groups["mpAndAB"];
+        throw new TypeError(`routeName parameter "${routeIdOrName}" not in expected format: ${WsdotRHRouteName.routeNameRe}.`);
+    }
+
+    private _routeId: RouteDescription;
+    private _milepost: Milepost;
+
+    /** Route Identifier */
+    public get routeId(): RouteDescription {
+        return this._routeId;
+    }
+
+    /** 
+     * Milepost w/ boolean back mileage indicator 
+     */
+    public get milepost(): Milepost {
+        return this._milepost;
+    }
+
+    /**
+     * Creates an instance by parsing the input string.
+     * @param routeName A string that will be parsed into a {@link RouteDescription} and {@link Milepost}.
+     */
+    constructor(routeName: string)
+    /**
+     * Creates an instance from {@link RouteDescription} and {@link Milepost} parameters.
+     * @param routeId - Route ID
+     * @param mp - Milepost
+     */
+    constructor(routeId: RouteDescription | string, mp: Milepost)
+    /**
+     * 
+     * @param routeIdOrName 
+     * @param mp 
+     */
+    constructor(routeIdOrName: string | RouteDescription, mp?: Milepost) {
+        if (routeIdOrName instanceof RouteDescription) {
+            this._routeId = routeIdOrName;
+            if (typeof mp === "undefined") {
+                throw new TypeError(`You must provide a value for the mp parameter if first parameter is a ${RouteDescription.name}`);
             } else {
-                throw new TypeError(`routeName parameter "${routeIdOrName}" not in expected format: ${WsdotRHRouteName.routeNameRe}.`);
+                this._milepost = mp;
             }
         } else {
-            throw new TypeError("input arguments not of expected types.");
+            const [r, m] =
+                WsdotRHRouteName.parseRouteIdAndMilepost(routeIdOrName);
+            this._routeId = r;
+            this._milepost = m;
         }
 
-        if (this._routeId === undefined || this._milepost === undefined) {
-            throw new TypeError("Parameters have not been assigned.")
+        if (!this._routeId || !this._milepost) {
+            throw new TypeError();
         }
     }
 }

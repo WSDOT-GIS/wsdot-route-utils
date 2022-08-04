@@ -28,6 +28,15 @@
 				"$eslint-stylish"
 			],
 			"label": "eslint: lint whole folder"
+		},
+		{
+			"type": "npm",
+			"script": "lint",
+			"problemMatcher": [
+				"$eslint-compact"
+			],
+			"label": "npm: lint",
+			"detail": "Run eslint"
 		}
 	]
 }

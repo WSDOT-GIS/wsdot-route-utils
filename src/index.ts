@@ -5,5 +5,6 @@ export * from "./rrt.js";
 export * from "./rrq.js";
 export * from "./Milepost.js";
 export * from "./regex.js"
+export * from "./RouteName.js"
 import FormatError from "./FormatError.js";
 export { FormatError };

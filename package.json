@@ -12,8 +12,8 @@
     "prepare": "tsc",
     "doc": "typedoc",
     "clean": "git clean -dfx -e node_modules",
-    "lint": "eslint -f unix \"src/**/*.{ts,tsx}\"",
-    "test": "jest",
+    "lint": "eslint .",
+    "test": "jest --bail",
     "test:watch": "jest --watch --bail=1 --onlyChanged"
   },
   "keywords": [

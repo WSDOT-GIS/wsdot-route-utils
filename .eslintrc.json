@@ -6,7 +6,8 @@
         "node": true
     },
     "ignorePatterns":[
-        "**/*.js"
+        "**/*.js",
+        "**/dist/*.*"
     ],
     "extends": [
         "eslint:recommended",

@@ -21,6 +21,13 @@
 			"problemMatcher": [],
 			"label": "npm: test",
 			"detail": "jest"
+		},
+		{
+			"type": "eslint",
+			"problemMatcher": [
+				"$eslint-stylish"
+			],
+			"label": "eslint: lint whole folder"
 		}
 	]
 }

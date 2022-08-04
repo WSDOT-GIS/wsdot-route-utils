@@ -1,13 +1,17 @@
 /**
  * This module is for RRT related stuff.
- * @module
+ * @packageDocumentation
  */
 
+/** The first character of a ramp RRT */
 export type RampFirstChar = `${"P" | "Q" | "R" | "S" | "U" | "W" | "X" | "Y"}`;
-type NonZeroDigits = `${1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9}`
+/** All digits other than zero */
+export type NonZeroDigits = `${1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9}`
+/** Expected RRT values for ramps. */
 export type RampRrtValue = `${RampFirstChar}${NonZeroDigits | "U"}`;
 
 /**
+ * Expected RRT values.
  * @see {@link rrts}
  */
 export type RrtValue =
@@ -50,11 +54,23 @@ export type RrtValue =
     /** Ramp  */
     | RampRrtValue
 
+
+export type RrtType = "ramp" | "ferries"
+
+/**
+ * Represents a Related Route Type
+ */
 export class RelatedRouteType {
+    /**
+     * Creates a new instance
+     * @param rrt - RRT
+     * @param description - Description of the RRT.
+     * @param rrtType - The type of RRT
+     */
     constructor(
         public readonly rrt: RrtValue,
         public readonly description: string,
-        public readonly rrtType: "ramp" | "ferries" | null = null
+        public readonly rrtType: RrtType | null = null
     ) { }
 }
 

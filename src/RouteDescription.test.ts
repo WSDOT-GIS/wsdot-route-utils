@@ -1,9 +1,13 @@
 import RouteDescription, { type IRouteDescription } from "./RouteDescription.js";
-import { rrtMapping } from "./rrt.js";
+import { rrtMapping, RrtValue } from "./rrt.js";
 import { getRouteParts } from "./wsdot-route-utils.js";
 
+/**
+ * Tests the {@link input} object to make sure it has all the properties
+ * and matching values of the {@link expected} object.
+ */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function allPropertiesMatchExpected(input: any, expected: any) {
+function allPropertiesMatchExpected(input: any, expected: any): void {
   for (const propertyName in expected) {
     if (Object.prototype.hasOwnProperty.call(expected, propertyName)) {
       const expectedValue = expected[propertyName];
@@ -12,7 +16,11 @@ function allPropertiesMatchExpected(input: any, expected: any) {
   }
 }
 
-function mappingHasKey(map: typeof rrtMapping, desc: RouteDescription) {
+/**
+ * Tests a {@link Map} that maps string descriptions to {@link RrtValue} keys
+ * to see if it contains values matching the input.
+ */
+function mappingHasKey(map: Map<RrtValue, string>, desc: RouteDescription): void {
   if (desc.rrt && map.has(desc.rrt)) {
     const expectedDesc = map.get(desc.rrt);
     expect(desc.rrtDescription).toEqual(expectedDesc);

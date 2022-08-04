@@ -1,6 +1,6 @@
 /**
  * Lookup for route shield types
- * @module route-shields
+ * @packageDocumentation route-shields
  */
 
 import FormatError from "./FormatError.js";
@@ -18,22 +18,10 @@ export type Prefix = "US" | "SR" | "I";
 export type MultiStatePrefix = "US" | "WA" | "I";
 
 // Create a symbol for each route shield type.
-/**
- * @private
- */
 const US_SYMBOL = Symbol("US");
-/**
- * @private
- */
 const IS_SYMBOL = Symbol("IS");
-/**
- * @private
- */
 const SR_SYMBOL = Symbol("SR");
 
-/**
- * @private
- */
 const shieldTypes = new Map<symbol, ShieldType>([
   [US_SYMBOL, "US"],
   [IS_SYMBOL, "IS"],
@@ -42,9 +30,8 @@ const shieldTypes = new Map<symbol, ShieldType>([
 
 /**
  * A Map that will provide a shield type for a given state route number.
- * @private
  */
-const shields = new Map<number, symbol>([
+const shields = new Map<number, typeof US_SYMBOL | typeof IS_SYMBOL | typeof SR_SYMBOL>([
   [2, US_SYMBOL],
   [3, SR_SYMBOL],
   [4, SR_SYMBOL],
@@ -240,7 +227,7 @@ const shields = new Map<number, symbol>([
  * @param routeId - route id.
  * Only up to the first three characters (i.e., digits)
  * are used by this function.
- * @throws {TypeError} thrown if routeId is neither string nor number.
+ * @throws {@link TypeError} thrown if routeId is neither string nor number.
  */
 export function getShieldType(routeId: string | number): ShieldType | null {
   let sr: number;
@@ -267,7 +254,7 @@ export function getShieldType(routeId: string | number): ShieldType | null {
  * Other maps such as OpenStreetMap and Google instead prefix them with "WA",
  * since their maps deal with more than one state.
  * Set this value to true to get "WA" instead of "SR".
- * @throws {TypeError} thrown if routeId is neither string nor number.
+ * @throws {@link TypeError} thrown if routeId is neither string nor number.
  */
 export function getPrefix(
   routeId: string | number,

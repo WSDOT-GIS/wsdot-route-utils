@@ -11,16 +11,24 @@ export class Milepost extends Object {
 
     private static readonly _mpRe = /^(?<mpX1000>\d+)(?<ab>[AB])$/i;
 
-    static parseBack(v: string | boolean): boolean {
-        if (typeof v === "boolean") {
-            return v;
-        } else if (v.toUpperCase() === "B") {
+    /**
+     * Parses a string into a boolean value: true for back mileage,
+     * or false otherwise.
+     * @param backIndicator - Input string. If this parameter is boolean,
+     * this function will simply return the same value.
+     * @returns A boolean equivalent of input back indicator string.
+     * @throws {@link TypeError}
+     */
+    static parseBack(backIndicator: string | boolean): boolean {
+        if (typeof backIndicator === "boolean") {
+            return backIndicator;
+        } else if (backIndicator.toUpperCase() === "B") {
             return true;
-        } else if (v.toUpperCase() === 'A') {
+        } else if (backIndicator.toUpperCase() === 'A') {
             return false;
         } else {
             const validValues = [true, false, "A", "B", "a", "b"];
-            throw new TypeError(`Input string is not valid: ${v}. Valid values are ${validValues.join(", ")}.`);
+            throw new TypeError(`Input string is not valid: ${backIndicator}. Valid values are ${validValues.join(", ")}.`);
         }
     }
 

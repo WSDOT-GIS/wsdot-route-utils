@@ -2,7 +2,7 @@
  * This module is for use with the WSDOT LRS map service with Roads & Highways
  * extension for parsing its route name string values.
  * 
- * @todo The following route names found in the Roads & Highways service
+ * TODO: The following route names found in the Roads & Highways service
  * do not currently match the regular expression and currently cannot be 
  * parsed.
  * 
@@ -76,7 +76,7 @@ export class WsdotRHRouteName {
 
     /**
      * Creates an instance by parsing the input string.
-     * @param routeName A string that will be parsed into a {@link RouteDescription} and {@link Milepost}.
+     * @param routeName - A string that will be parsed into a {@link RouteDescription} and {@link Milepost}.
      */
     constructor(routeName: string)
     /**
@@ -85,10 +85,20 @@ export class WsdotRHRouteName {
      * @param mp - Milepost
      */
     constructor(routeId: RouteDescription | string, mp: Milepost)
+
     /**
-     * 
-     * @param routeIdOrName 
-     * @param mp 
+     * @param routeId - A route identifier string.
+     */
+    constructor(routeId: string)
+    /**
+     * @param routeDesc - A route description object.
+     * @param mp - A milepost object.
+     */
+    constructor(routeDesc: RouteDescription, mp: Milepost)
+    /**
+     * Creates a new instance of this object.
+     * @param routeIdOrName - A route ID or {@link RouteDescription} object.
+     * @param mp - a milepost, required if {@link routeIdOrName} is a string.
      */
     constructor(routeIdOrName: string | RouteDescription, mp?: Milepost) {
         if (routeIdOrName instanceof RouteDescription) {

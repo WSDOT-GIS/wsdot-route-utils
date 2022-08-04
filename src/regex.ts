@@ -8,7 +8,6 @@ export type Suffix = "d" | "i" | "r";
  * @param inputRe - A regular expression ending with "$".
  * @param escapedText - Text to append to the end of the input RegExp.
  * @returns - Returns a modified copy of the input RegExp.
- * @private
  */
 function appendToRegex(inputRe: RegExp, escapedText: string): RegExp {
     return new RegExp(inputRe.source.split("$")[0] + escapedText + "$");
@@ -16,10 +15,8 @@ function appendToRegex(inputRe: RegExp, escapedText: string): RegExp {
 
 /**
  * Amends the input {@link RegExp} to allow suffix characters.
- * @param inputRe 
- * @param suffixesAreOptional - Will the suffixes be optional? 
- * Appends "?" to the output {@link RegExp} if true.
- * @param suffixes - Suffixes to add to the input {@link RegExp} to allow suffixes.
+ * @param inputRe - a regular expression.
+ * @param options - parsing options.
  * @returns 
  */
 export function appendSuffixesToRegex(inputRe: RegExp, options: RouteIdParseOptions) {
@@ -40,12 +37,12 @@ export function appendSuffixesToRegex(inputRe: RegExp, options: RouteIdParseOpti
 
 /**
  * Creates a regular expression that will match a state route.
- * @param validRrts You only need to use this parameter if new
+ * @param validRrts - You only need to use this parameter if new
  * RRTs have been added since this module was last published 
  * and you need to override the defaults.
  * @returns Will look something like this:
  * 
- * ```regex
+ * ```typescript
  * /^(?<sr>\d{3})(?:(?<rrt>(?:AR)|(?:C[DI])|(?:C[O])|(?:F[DI])|(?:LX)|(?:[PQRS][\dU])|(?:RL)|(?:SP)|(?:TB)|(?:TR)|(?:PR)|(?:F[ST])|(?:ML))(?<rrq>[A-Z0-9]{0,6}))?$/;
  * ```
  */

@@ -5,8 +5,8 @@
 export default class FormatError extends Error {
   /**
    * Creates a new instance of FormatError
-   * @param input The input string that caused the error
-   * @param expectedFormat The expected format as a RegExp.
+   * @param input - The input string that caused the error
+   * @param expectedFormat - The expected format as a RegExp.
    */
   constructor(
     public readonly input: string,

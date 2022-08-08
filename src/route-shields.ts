@@ -22,11 +22,11 @@ export type MultiStatePrefix = "US" | "WA" | "I";
 
 // Create a symbol for each route shield type.
 /** {@link Symbol} for "US" */
-const US_SYMBOL = Symbol("US");
+export const US_SYMBOL = Symbol("US");
 /** {@link Symbol} for "IS" */
-const IS_SYMBOL = Symbol("IS");
+export const IS_SYMBOL = Symbol("IS");
 /** {@link Symbol} for "SR" */
-const SR_SYMBOL = Symbol("SR");
+export const SR_SYMBOL = Symbol("SR");
 
 /**
  * A mapping of shield prefix symbols to {@link ShieldType|ShieldTypes}.

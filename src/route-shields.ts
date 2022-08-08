@@ -15,13 +15,22 @@ export type ShieldType = "US" | "SR" | "IS";
  */
 export type Prefix = "US" | "SR" | "I";
 
+/**
+ * Prefixes for use with multi-state data, where they use "WA" instead of "SR" for routes in WA.
+ */
 export type MultiStatePrefix = "US" | "WA" | "I";
 
 // Create a symbol for each route shield type.
+/** {@link Symbol} for "US" */
 const US_SYMBOL = Symbol("US");
+/** {@link Symbol} for "IS" */
 const IS_SYMBOL = Symbol("IS");
+/** {@link Symbol} for "SR" */
 const SR_SYMBOL = Symbol("SR");
 
+/**
+ * A mapping of shield prefix symbols to {@link ShieldType|ShieldTypes}.
+ */
 const shieldTypes = new Map<symbol, ShieldType>([
   [US_SYMBOL, "US"],
   [IS_SYMBOL, "IS"],
@@ -29,7 +38,7 @@ const shieldTypes = new Map<symbol, ShieldType>([
 ]);
 
 /**
- * A Map that will provide a shield type for a given state route number.
+ * A mapping of state route numbers to {@link ShieldType|ShieldTypes}.
  */
 const shields = new Map<number, typeof US_SYMBOL | typeof IS_SYMBOL | typeof SR_SYMBOL>([
   [2, US_SYMBOL],
@@ -227,7 +236,9 @@ const shields = new Map<number, typeof US_SYMBOL | typeof IS_SYMBOL | typeof SR_
  * @param routeId - route id.
  * Only up to the first three characters (i.e., digits)
  * are used by this function.
- * @throws {@link TypeError} thrown if routeId is neither string nor number.
+ * @throws {TypeError} - thrown if routeId is neither string nor number.
+ * @throws {FormatError} - thrown if {@link routeId} is a string but not 
+ * in the expected format, consisting only of digits.
  */
 export function getShieldType(routeId: string | number): ShieldType | null {
   let sr: number;
@@ -254,12 +265,12 @@ export function getShieldType(routeId: string | number): ShieldType | null {
  * Other maps such as OpenStreetMap and Google instead prefix them with "WA",
  * since their maps deal with more than one state.
  * Set this value to true to get "WA" instead of "SR".
- * @throws {@link TypeError} thrown if routeId is neither string nor number.
+ * @throws - @see {@link getShieldType} for details.
  */
 export function getPrefix(
   routeId: string | number,
   useWAForSR = false
-) {
+): Prefix | "WA" | null {
   const shield = getShieldType(routeId);
   if (shield === null) {
     return shield;

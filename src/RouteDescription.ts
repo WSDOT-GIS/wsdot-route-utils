@@ -95,7 +95,7 @@ export class RouteDescription extends Object implements IRouteDescription {
      * @param routeId - route ID
      * @param options - route parsing options.
      * @see - same named parameter of {@link getRouteParts}
-     * @throws {@link FormatError} @see {@link getRouteParts}
+     * @throws {FormatError} @see {@link getRouteParts}
      */
     constructor(routeId: string, options: RouteIdParseOptions = DEFAULT_ROUTE_ID_PARSE_OPTIONS) {
         super();

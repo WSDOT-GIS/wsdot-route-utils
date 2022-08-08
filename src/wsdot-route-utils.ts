@@ -48,8 +48,8 @@ export const DEFAULT_ROUTE_ID_PARSE_OPTIONS: RouteIdParseOptions = {
  * The elements at position 1 and 2 may be null if a route has no RRT or RRQ
  * (as would be the case with a mainline).
  * Will be null if the routeId is not in the expected format and if throwErrorOnMatchFail is false.
- * @throws {@link TypeError} thrown if routeId is not a string.
- * @throws {@link FormatError} thrown if routeId is not in the expected format and throwErrorOnMatchFail is true.
+ * @throws {TypeError} thrown if routeId is not a string.
+ * @throws {FormatError} thrown if routeId is not in the expected format and throwErrorOnMatchFail is true.
  */
 export function getRouteParts(
   routeId: string,

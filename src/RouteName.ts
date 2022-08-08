@@ -13,7 +13,7 @@
  * * 005CNLC2RMP3i000000A
  */
 
-import { RouteDescription, Milepost, createRouteRegex } from "./index.js";
+import { RouteDescription, Milepost, createRouteRegex, FormatError } from "./index.js";
 
 export type BackIndicator = "A" | "B";
 export type IsBackInput = boolean | BackIndicator | Lowercase<BackIndicator>;
@@ -53,10 +53,10 @@ export class WsdotRHRouteName {
             const routeIdString = match.groups["routeIdAndDir"];
             const milepostString = match.groups["mpAndAB"];
             const routeId = WsdotRHRouteName.parseRouteDescription(routeIdString);
-            const milepost = new Milepost(milepostString);
+            const milepost = Milepost.parseFromRoadsAndHighways(milepostString);
             return [routeId, milepost]
         }
-        throw new TypeError(`routeName parameter "${routeIdOrName}" not in expected format: ${WsdotRHRouteName.routeNameRe}.`);
+        throw new FormatError(routeIdOrName, WsdotRHRouteName.routeNameRe, `routeName parameter "${routeIdOrName}" not in expected format: ${WsdotRHRouteName.routeNameRe}.`);
     }
 
     private _routeId: RouteDescription;
@@ -99,6 +99,8 @@ export class WsdotRHRouteName {
      * Creates a new instance of this object.
      * @param routeIdOrName - A route ID or {@link RouteDescription} object.
      * @param mp - a milepost, required if {@link routeIdOrName} is a string.
+     * @throws {TypeError} - Thrown if input is a {@link RouteDescription} 
+     * but no value was provided for  {@link mp}.
      */
     constructor(routeIdOrName: string | RouteDescription, mp?: Milepost) {
         if (routeIdOrName instanceof RouteDescription) {

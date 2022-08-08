@@ -40,7 +40,7 @@ const shieldTypes = new Map<symbol, ShieldType>([
 /**
  * A mapping of state route numbers to {@link ShieldType|ShieldTypes}.
  */
-const shields = new Map<number, typeof US_SYMBOL | typeof IS_SYMBOL | typeof SR_SYMBOL>([
+export const shields = new Map<number, typeof US_SYMBOL | typeof IS_SYMBOL | typeof SR_SYMBOL>([
   [2, US_SYMBOL],
   [3, SR_SYMBOL],
   [4, SR_SYMBOL],

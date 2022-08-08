@@ -1,4 +1,4 @@
-import { FormatError, Milepost } from "./index.js";
+import { FormatError, Milepost } from "../src/index.js";
 
 describe('Mileposts', () => {
     test('Milepost constructor parsing, etc.', () => {

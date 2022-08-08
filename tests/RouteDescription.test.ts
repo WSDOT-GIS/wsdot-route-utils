@@ -1,6 +1,4 @@
-import RouteDescription, { type IRouteDescription } from "./RouteDescription.js";
-import { rrtMapping, RrtValue } from "./rrt.js";
-import { getRouteParts } from "./wsdot-route-utils.js";
+import { type IRouteDescription, RouteDescription, rrtMapping, RrtValue, getRouteParts } from "../src/index.js";
 
 /**
  * Tests the {@link input} object to make sure it has all the properties

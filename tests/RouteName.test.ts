@@ -29,7 +29,7 @@ describe("WSDOT Roads & Highways Route Name parsing", () => {
             }
         }
         if (!!unmatchable && unmatchable.size > 0) {
-            console.warn(`Some of the input route names were skipped due to not matching the expected format.\n${[...unmatchable].join("\n")}`);
+            console.warn(`Some of the input route names were skipped due to not matching the expected format.\n${[...unmatchable].join("\n")}\nExpected format: ${expectedFormat}`);
         }
 
     });

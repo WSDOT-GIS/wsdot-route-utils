@@ -11,6 +11,13 @@
  * * 005CNLC2RMP1i000000A
  * * 005CNLC2RMP2i000000A
  * * 005CNLC2RMP3i000000A
+ * * 097AiCN002S2i000000A
+ * * 405CNLC2RMP1i000000A
+ * * 518CNLC2RMP1i000000A
+ * * 520P1CN202di000000A
+ * * 520P1CNLCdi000000A
+ * * LC2512S5rampi000000A
+ * * LCCN2026di000000A
  */
 
 import { RouteDescription, Milepost, createRouteRegex, FormatError } from "./index.js";
@@ -26,7 +33,7 @@ export type IsBackInput = boolean | BackIndicator | Lowercase<BackIndicator>;
  */
 export function buildRouteNameRegExp(validRrts?: string[]): RegExp {
     // /^(?<routeIdAndDir>(?<routeId>[\da-z]+)(?<routeType>[idr]))(?<additionalInfo>\w+[idr])?(?<mpAndAB>(?<mpX1000>\d+)(?<ab>[AB]))$/i;
-    const routeIdRegex = createRouteRegex(validRrts);
+    const routeIdRegex = createRouteRegex(validRrts, "PQRSUWXY");
 
     let routeIdPattern = routeIdRegex.source;
 

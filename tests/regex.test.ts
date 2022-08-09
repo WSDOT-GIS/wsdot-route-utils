@@ -1,4 +1,4 @@
-import { srRegex } from "../src/index.js";
+import { srRegex, createRrtRegex, rrtMapping } from "../src/index.js";
 
 describe("RegExp tests", () => {
     test("route groups are correct", () => {
@@ -11,6 +11,14 @@ describe("RegExp tests", () => {
             expect(sr).toEqual("101");
             expect(rrt).toEqual("CO");
             expect(rrq).toEqual("ABERDN");
+        }
+    });
+
+    test("create RRT RegExp", () => {
+        const rrtRegex = createRrtRegex();
+        console.debug("RRT Regex", rrtRegex);
+        for (const [rrt] of rrtMapping) {
+            expect(rrt).toMatch(rrtRegex);
         }
     })
 });

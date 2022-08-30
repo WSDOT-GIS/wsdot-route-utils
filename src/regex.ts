@@ -15,7 +15,7 @@ function appendToRegex(inputRe: RegExp, escapedText: string): RegExp {
 }
 
 /**
- * Amends the input {@link RegExp} to allow suffix characters.
+ * Amends the input [RegExp](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp) to allow suffix characters.
  * @param inputRe - a regular expression.
  * @param options - parsing options.
  * @returns 
@@ -37,7 +37,7 @@ export function appendSuffixesToRegex(inputRe: RegExp, options: RouteIdParseOpti
 }
 
 /**
- * Creates a {@link RegExp} that will match any of the provided RRT values.
+ * Creates a [RegExp](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp) that will match any of the provided RRT values.
  * @param validRrts - A list of RRT values
  * @returns A regular expression that will match all of the {@link validRrts}.
  */

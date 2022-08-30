@@ -21,11 +21,11 @@ export type Prefix = "US" | "SR" | "I";
 export type MultiStatePrefix = "US" | "WA" | "I";
 
 // Create a symbol for each route shield type.
-/** {@link Symbol} for "US" */
+/** [Symbol](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol) for "US" */
 export const US_SYMBOL = Symbol("US");
-/** {@link Symbol} for "IS" */
+/** [Symbol](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol) for "IS" */
 export const IS_SYMBOL = Symbol("IS");
-/** {@link Symbol} for "SR" */
+/** [Symbol](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol) for "SR" */
 export const SR_SYMBOL = Symbol("SR");
 
 /**
@@ -34,13 +34,16 @@ export const SR_SYMBOL = Symbol("SR");
 const shieldTypes = new Map<symbol, ShieldType>([
   [US_SYMBOL, "US"],
   [IS_SYMBOL, "IS"],
-  [SR_SYMBOL, "SR"]
+  [SR_SYMBOL, "SR"],
 ]);
 
 /**
  * A mapping of state route numbers to {@link ShieldType|ShieldTypes}.
  */
-export const shields = new Map<number, typeof US_SYMBOL | typeof IS_SYMBOL | typeof SR_SYMBOL>([
+export const shields = new Map<
+  number,
+  typeof US_SYMBOL | typeof IS_SYMBOL | typeof SR_SYMBOL
+>([
   [2, US_SYMBOL],
   [3, SR_SYMBOL],
   [4, SR_SYMBOL],
@@ -228,7 +231,7 @@ export const shields = new Map<number, typeof US_SYMBOL | typeof IS_SYMBOL | typ
   [904, SR_SYMBOL],
   [906, SR_SYMBOL],
   [970, SR_SYMBOL],
-  [971, SR_SYMBOL]
+  [971, SR_SYMBOL],
 ]);
 
 /**
@@ -236,8 +239,8 @@ export const shields = new Map<number, typeof US_SYMBOL | typeof IS_SYMBOL | typ
  * @param routeId - route id.
  * Only up to the first three characters (i.e., digits)
  * are used by this function.
- * @throws {TypeError} - thrown if routeId is neither string nor number.
- * @throws {FormatError} - thrown if {@link routeId} is a string but not 
+ * @throws [TypeError](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError) - thrown if routeId is neither string nor number.
+ * @throws {@link FormatError} - thrown if {@link routeId} is a string but not
  * in the expected format, consisting only of digits.
  */
 export function getShieldType(routeId: string | number): ShieldType | null {
@@ -245,6 +248,7 @@ export function getShieldType(routeId: string | number): ShieldType | null {
   if (typeof routeId === "number") {
     sr = routeId;
   } else if (typeof routeId === "string") {
+    // matches up to three digit characters at the beginning of a string.
     const re = /^\d{1,3}/;
     const match = routeId.match(re);
     if (!match) {

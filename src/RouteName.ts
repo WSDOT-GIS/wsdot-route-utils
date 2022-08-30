@@ -26,7 +26,7 @@ export type BackIndicator = "A" | "B";
 export type IsBackInput = boolean | BackIndicator | Lowercase<BackIndicator>;
 
 /**
- * Builds a {@link RegExp} that will match a route name.
+ * Builds a {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp|RegExp} that will match a route name.
  * @param validRrts - 
  * @see {@link createRouteRegex}
  * @returns 
@@ -52,7 +52,7 @@ export function buildRouteNameRegExp(validRrts?: string[]): RegExp {
 export class WsdotRHRouteName {
     public static readonly routeNameRe = buildRouteNameRegExp();
     private static parseRouteDescription(v: RouteDescription | string) {
-        return v instanceof RouteDescription ? v : RouteDescription.parseRoadsAndHighwaysRouteId(v, true);
+        return v instanceof RouteDescription ? v : RouteDescription.parseRoadsAndHighwaysRouteId(v);
     }
     static parseRouteIdAndMilepost(routeIdOrName: string): [RouteDescription, Milepost] {
         const match = routeIdOrName.match(WsdotRHRouteName.routeNameRe);
@@ -106,7 +106,7 @@ export class WsdotRHRouteName {
      * Creates a new instance of this object.
      * @param routeIdOrName - A route ID or {@link RouteDescription} object.
      * @param mp - a milepost, required if {@link routeIdOrName} is a string.
-     * @throws {TypeError} - Thrown if input is a {@link RouteDescription} 
+     * @throws {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError|TypeError} - Thrown if input is a {@link RouteDescription} 
      * but no value was provided for  {@link mp}.
      */
     constructor(routeIdOrName: string | RouteDescription, mp?: Milepost) {

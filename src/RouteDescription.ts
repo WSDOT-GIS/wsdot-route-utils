@@ -2,7 +2,7 @@ import type { Suffix } from "./regex.js";
 import { getShieldType, ShieldType } from "./route-shields.js";
 import rrqs from "./rrq.js";
 import { RampDescription, RampRrtValue, rrts, RrtValue } from "./rrt.js";
-import { DEFAULT_ROUTE_ID_PARSE_OPTIONS, getRouteParts, type RouteIdParseOptions } from "./wsdot-route-utils.js";
+import { DEFAULT_ROUTE_ID_PARSE_OPTIONS, getRouteParts, RouteIdConstructorOptions, RoutePartsArray, type RouteIdParseOptions } from "./wsdot-route-utils.js";
 
 export interface IRouteDescription {
     /**
@@ -81,7 +81,7 @@ export interface IRouteDescription {
  * Provides a description of a route.
  */
 export class RouteDescription extends Object implements IRouteDescription {
-    private _sr: string | null | undefined;
+    private _sr: string;
     private _rrt: RrtValue | null | undefined;
     private _rrq: string | null | undefined;
     private _isDecrease: boolean | null = null;
@@ -93,17 +93,20 @@ export class RouteDescription extends Object implements IRouteDescription {
     /**
      * Creates new instance.
      * @param routeId - route ID
-     * @param options - route parsing options.
+     * @param options - route parsing options. Note that the value of 
+     * {@link RouteIdParseOptions.throwErrorOnMatchFail} will be ignored 
+     * and will behave as if it were set to `true`.
      * @see - same named parameter of {@link getRouteParts}
-     * @throws {FormatError} @see {@link getRouteParts}
+     * @throws {@link TypeError} @see {@link getRouteParts}
+     * @throws {@link FormatError} @see {@link getRouteParts}
      */
-    constructor(routeId: string, options: RouteIdParseOptions = DEFAULT_ROUTE_ID_PARSE_OPTIONS) {
+    constructor(routeId: string, options: RouteIdConstructorOptions = DEFAULT_ROUTE_ID_PARSE_OPTIONS) {
         super();
-        // const routeParts = getRouteParts(routeId, true, suffixesAreOptional, ...allowedSuffixes);
-        const routeParts = getRouteParts(routeId, options);
-        if (!routeParts) {
-            throw new TypeError()
-        }
+        // When constructing an object of this type, we ALWAYS want an exception
+        // to be thrown when parsing.
+        (options as RouteIdParseOptions).throwErrorOnMatchFail = true;
+        const routeParts = getRouteParts(routeId, options) as RoutePartsArray;
+        // If there are more than one allowedSuffixes defined...
         if (options?.allowedSuffixes && options?.allowedSuffixes.length) {
             let suffix: string | undefined;
             [this._sr, this._rrt, this._rrq, suffix] = routeParts;
@@ -114,19 +117,17 @@ export class RouteDescription extends Object implements IRouteDescription {
         }
     }
 
-    public static parseWaprRouteId(routeId: string, throwErrorOnMatchFail = DEFAULT_ROUTE_ID_PARSE_OPTIONS.throwErrorOnMatchFail) {
+    public static parseWaprRouteId(routeId: string) {
         return new RouteDescription(routeId, {
             allowedSuffixes: ["d"],
-            suffixesAreOptional: true,
-            throwErrorOnMatchFail
+            suffixesAreOptional: true
         })
     }
 
-    public static parseRoadsAndHighwaysRouteId(routeId: string, throwErrorOnMatchFail = DEFAULT_ROUTE_ID_PARSE_OPTIONS.throwErrorOnMatchFail) {
+    public static parseRoadsAndHighwaysRouteId(routeId: string,) {
         return new RouteDescription(routeId, {
             allowedSuffixes: ["i", "d", "r"],
-            suffixesAreOptional: false,
-            throwErrorOnMatchFail
+            suffixesAreOptional: false
         })
     }
 
@@ -135,11 +136,7 @@ export class RouteDescription extends Object implements IRouteDescription {
      */
     public get shield(): ShieldType | null {
         if (this._shield === undefined) {
-            if (!this.sr) {
-                this._shield = null;
-            } else {
-                this._shield = getShieldType(this.sr) || null;
-            }
+            this._shield = getShieldType(this.sr) || null;
         }
         return this._shield;
     }
@@ -147,8 +144,8 @@ export class RouteDescription extends Object implements IRouteDescription {
     /**
      * Mainline component of route ID.
      */
-    public get sr(): string | null {
-        return this._sr || null;
+    public get sr() {
+        return this._sr;
     }
 
     /**

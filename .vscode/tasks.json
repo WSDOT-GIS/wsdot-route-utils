@@ -37,6 +37,46 @@
 			],
 			"label": "npm: lint",
 			"detail": "Run eslint"
+		},
+		{
+			"label": "Serve docs",
+			"detail": "Serves the contents of the docs folder using dotnet-serve",
+			"icon": {
+				"id": "book",
+				"color": "terminal.ansiBlue"
+			},
+			"type": "shell",
+			"command": "dotnet-serve",
+			"args": [
+				"--directory docs",
+				"-o"
+			],
+			"problemMatcher": []
+		},{
+			"label": "Serve coverage",
+			"detail": "Serves the coverage report from Jest using dotnet-serve",
+			"icon": {
+				"id": "book",
+				"color": "terminal.ansiBlue"
+			},
+			"type": "shell",
+			"command": "dotnet-serve",
+			"args": [
+				"--directory coverage/lcov-report",
+				"-o"
+			],
+			"problemMatcher": []
+		},
+		{
+			"type": "npm",
+			"script": "doc",
+			"problemMatcher": [],
+			"label": "Build docs",
+			"icon": {
+				"id": "book",
+				"color": "terminal.ansiRed"
+			},
+			"detail": "Builds documenatation website files with typedoc"
 		}
 	]
 }

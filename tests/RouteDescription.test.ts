@@ -1,4 +1,10 @@
-import { type IRouteDescription, RouteDescription, rrtMapping, RrtValue, getRouteParts } from "../src/index.js";
+import {
+  type IRouteDescription,
+  RouteDescription,
+  rrtMapping,
+  RrtValue,
+  getRouteParts,
+} from "../src";
 
 /**
  * Tests the {@link input} object to make sure it has all the properties
@@ -18,7 +24,10 @@ function allPropertiesMatchExpected(input: any, expected: any): void {
  * Tests a {@link Map} that maps string descriptions to {@link RrtValue} keys
  * to see if it contains values matching the input.
  */
-function mappingHasKey(map: Map<RrtValue, string>, desc: RouteDescription): void {
+function mappingHasKey(
+  map: Map<RrtValue, string>,
+  desc: RouteDescription
+): void {
   if (desc.rrt && map.has(desc.rrt)) {
     const expectedDesc = map.get(desc.rrt);
     expect(desc.rrtDescription).toEqual(expectedDesc);
@@ -52,13 +61,13 @@ describe("RouteDescription", () => {
       mainlineConnectionMP: null,
       rrtDescription: null,
       rrqDescription: null,
-      shield: "IS"
+      shield: "IS",
     });
   });
   test("can parse route with RRT && RRQ", () => {
     const srid = "101COABERDN";
     const routeParts = getRouteParts(srid, {
-      throwErrorOnMatchFail: true
+      throwErrorOnMatchFail: true,
     });
     if (routeParts !== null) {
       const [sr, rrt, rrq] = routeParts;
@@ -87,7 +96,7 @@ describe("RouteDescription", () => {
 
     const withDirDesc = new RouteDescription(withDirId, {
       suffixesAreOptional: false,
-      allowedSuffixes: ["d"]
+      allowedSuffixes: ["d"],
     });
     const nonDirDesc = new RouteDescription(nonDirId);
     expect(withDirDesc.isDecrease).toEqual(true);
@@ -95,7 +104,7 @@ describe("RouteDescription", () => {
 
     const incDesc = new RouteDescription(nonDirId, {
       suffixesAreOptional: true,
-      allowedSuffixes: ["d"]
+      allowedSuffixes: ["d"],
     });
     expect(incDesc.isDecrease).toEqual(false);
     expect(() => {
@@ -112,12 +121,10 @@ describe("RouteDescription", () => {
         RouteTypeSuffix: "d",
         rrtDescription: "On Ramp 5, Dec",
         rrqDescription: null,
-        shield: "IS"
+        shield: "IS",
       };
       allPropertiesMatchExpected(desc, expected);
       mappingHasKey(rrtMapping, desc);
     }).toThrowError();
   });
 });
-
-

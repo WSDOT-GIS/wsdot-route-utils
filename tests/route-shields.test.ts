@@ -1,4 +1,4 @@
-import { getPrefix, getShieldType, shields } from "../src/index.js";
+import { getPrefix, getShieldType, shields } from "../src";
 import routeResults from "./sample-data/routes.json"
 
 const shieldsArray = [...shields];

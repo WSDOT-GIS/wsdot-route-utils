@@ -1,4 +1,4 @@
-import { srRegex, createRrtRegex, rrtMapping } from "../src/index.js";
+import { srRegex, createRrtRegex, rrtMapping } from "../src";
 
 describe("RegExp tests", () => {
     test("route groups are correct", () => {

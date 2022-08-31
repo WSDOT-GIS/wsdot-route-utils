@@ -1,9 +1,16 @@
 version: "0.2"
+allowCompoundWords: true
 ignorePaths: []
-dictionaryDefinitions: []
-dictionaries: []
+dictionaryDefinitions:
+  - name: custom-dictionary
+    path: ./.cspell/custom-dictionary.txt
+    addWords: true
+dictionaries:
+  - custom-dictionary
 words:
   - typedoc
   - WSDOT
-ignoreWords: []
+ignoreWords:
+  - CNLC
+  - PQRS
 import: []

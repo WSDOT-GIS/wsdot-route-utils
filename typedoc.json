@@ -1,0 +1,9 @@
+{
+    "$schema": "https://typedoc.org/schema.json",
+    "entryPoints": ["./src/index.ts"],
+    "cleanOutputDir": true,
+    "logger": "console",
+    "plugin": [
+        "typedoc-plugin-coverage"
+    ]
+}

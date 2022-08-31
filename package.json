@@ -11,7 +11,7 @@
   "files": [
     "dist"
   ],
-  "typings": "dist/index.d.ts",
+  "types": "dist/index.d.ts",
   "scripts": {
     "prepare": "tsc",
     "doc": "typedoc && node ./tools/insert-coverage.mjs",

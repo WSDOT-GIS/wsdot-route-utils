@@ -59,11 +59,14 @@ export class Milepost extends Object {
      * @param forceA - If set to true and if {@link isBack} is false, an "A" will be appended to the end of the output string.
      * @returns A string representation of this object.
      */
+    override toString(forceA: true): `${number}${BackIndicator}`;
+    override toString(forceA: false): `${number}${"B" | ""}`;
+    override toString(): `${number}${"B" | ""}`;
     override toString(forceA = false) {
         if (!forceA && !this.isBack) {
-            return this.mp.toString(10);
+            return this.mp.toString(10) as `${number}`;
         }
-        return `${this.mp}${this.mpAsChar}`;
+        return `${this.mp}${this.mpAsChar}` as `${number}${BackIndicator}`;
     }
 
     /**

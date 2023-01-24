@@ -58,7 +58,7 @@ export class WsdotRHRouteName {
         const match = routeIdOrName.match(WsdotRHRouteName.routeNameRe);
         if (match && match.groups) {
             const routeIdString = match.groups["routeIdAndDir"];
-            const milepostString = match.groups["mpAndAB"];
+            const milepostString = match.groups["mpAndAB"] as `${number}${BackIndicator}`;
             const routeId = WsdotRHRouteName.parseRouteDescription(routeIdString);
             const milepost = Milepost.parseFromRoadsAndHighways(milepostString);
             return [routeId, milepost]

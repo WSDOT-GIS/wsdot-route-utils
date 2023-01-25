@@ -23,7 +23,7 @@ describe("Mileposts", () => {
       new Milepost(badInput);
     }).toThrow(FormatError);
     expect(() => {
-      Milepost.parseFromRoadsAndHighways(badInput);
+      Milepost.parseFromRoadsAndHighways(badInput as `${number}${"A"|"B"}`);
     }).toThrow(FormatError);
   });
 });

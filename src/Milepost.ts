@@ -31,10 +31,7 @@ export class Milepost extends Object {
     if (typeof backIndicator === "boolean") {
       return backIndicator;
     }
-    if (
-      typeof backIndicator === "string" &&
-      backIndicator.toUpperCase() === "B"
-    ) {
+    if (typeof backIndicator === "string" && /^B$/i.test(backIndicator)) {
       return true;
     }
     return false;
@@ -81,7 +78,7 @@ export class Milepost extends Object {
     if (!forceA && !this.isBack) {
       return this.mp.toString(10) as `${number}`;
     }
-    return `${this.mp}${this.mpAsChar}` as `${number}${BackIndicator}`;
+    return `${this.mp}${this.backAsChar}` as `${number}${BackIndicator}`;
   }
 
   /**
@@ -109,7 +106,7 @@ export class Milepost extends Object {
    * Creates a new Milepost instance.
    * @param mpString - A string representation of an integer
    */
-  constructor(mpString: string);
+  constructor(mpString: `${number}${"B" | "A" | ""}`);
   /**
    * Creates a new Milepost instance.
    * @param mp - Milepost value

@@ -5,6 +5,15 @@ import type { RouteIdParseOptions } from "./wsdot-route-utils.js";
 export type Suffix = "d" | "i" | "r";
 
 /**
+ * Determines if an input string is a valid suffix.
+ * @param input - A string to be checked.
+ * @returns 
+ */
+export function isSuffix(input: unknown): input is Suffix {
+    return typeof input === "string" && /^[dir]$/.test(input);
+}
+
+/**
  * Appends text to the end of (a copy of) a regular expression.
  * @param inputRe - A regular expression ending with "$".
  * @param escapedText - Text to append to the end of the input RegExp.

@@ -3,6 +3,7 @@
  * https://jestjs.io/docs/configuration
  */
 
+// eslint-disable-next-line tsdoc/syntax
 /** @type {import('ts-jest').InitialOptionsTsJest} */
 export default {
   // All imported modules in your tests should be mocked automatically

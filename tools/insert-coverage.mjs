@@ -1,6 +1,6 @@
 import { writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
-import { fileURLToPath, pathToFileURL } from "node:url";
+import { fileURLToPath } from "node:url";
 import { JSDOM } from "jsdom";
 
 /**

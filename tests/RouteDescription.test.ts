@@ -4,6 +4,7 @@ import {
   rrtMapping,
   RrtValue,
   getRouteParts,
+  isSuffix,
 } from "../src";
 
 /**
@@ -53,6 +54,7 @@ describe("RouteDescription", () => {
     expect(desc.rrqDescription).toBeNull();
     expect(desc.toString()).toEqual(srid);
     expect(desc.shield).toEqual("IS");
+    expect(desc.isMainline).toStrictEqual(true);
 
     allPropertiesMatchExpected(desc, {
       sr: "005",
@@ -126,5 +128,14 @@ describe("RouteDescription", () => {
       allPropertiesMatchExpected(desc, expected);
       mappingHasKey(rrtMapping, desc);
     }).toThrowError();
+  });
+  test('can parse WAPR Route Id', () => {
+    const withDirId = "529SPEVERETd";
+    const nonDirId = "005Q516479";
+
+    let desc = RouteDescription.parseWaprRouteId(withDirId);
+    expect(isSuffix(desc.RouteTypeSuffix)).toStrictEqual(true);
+    desc = RouteDescription.parseWaprRouteId(nonDirId);
+    expect(isSuffix(desc.RouteTypeSuffix)).toStrictEqual(false);
   });
 });
